@@ -6,13 +6,20 @@ import { ImageCard } from "./ImageCard"
 const Home = () => {
   const [images, setImages] = useState([])
   const [isDragging, setIsDragging] = useState(false)
+  const [isActive, setIsActive] = useState(false) 
   // isProcessing global used for drag/drop loading. 
   // We use processingId for individual downloads.
   const [isProcessing, setIsProcessing] = useState(false)
-  const [processingId, setProcessingId] = useState(null)
+  // Track multiple processing IDs for concurrent downloads
+  const [processingIds, setProcessingIds] = useState(new Set())
+  const [queue, setQueue] = useState([])
+
+  const [successIds, setSuccessIds] = useState(new Set())
+  const [warningMsg] = useState(null) // Deprecated, kept null to avoid break if referenced, but logic removed
   
   const fileInputRef = useRef(null)
   const dragCounter = useRef(0)
+  const abortControllers = useRef({})
   
   // Handler to update specific property for a specific image
   const handleImageUpdate = (id, key, value) => {
@@ -108,7 +115,9 @@ const Home = () => {
                 id: crypto.randomUUID(),
                 targetSize: 100,
                 targetUnit: "KB",
-                targetFormat: defaultFormat
+                targetFormat: defaultFormat,
+                resizeMode: 'size',
+                targetQuality: '0.9'
             })
         } catch (error) {
             console.error("Error processing file:", file.name, error)
@@ -132,6 +141,18 @@ const Home = () => {
     }
   }, [])
 
+  // Paste Handler
+  useEffect(() => {
+    const handlePaste = (e) => {
+        if (e.clipboardData && e.clipboardData.files.length > 0) {
+            e.preventDefault()
+            processFiles(e.clipboardData.files)
+        }
+    }
+    window.addEventListener('paste', handlePaste)
+    return () => window.removeEventListener('paste', handlePaste)
+  }, [processFiles])
+
   /* ----------------------------- Actions ----------------------------- */
   const removeImage = (id) => {
     setImages(prev => {
@@ -139,37 +160,66 @@ const Home = () => {
         if (target) URL.revokeObjectURL(target.url)
         return prev.filter(i => i.id !== id)
     })
+    // Remove from queue if present
+    setQueue(prev => prev.filter(qId => qId !== id))
   }
 
-  const processAndDownloadImage = async (imgData) => {
+  const processAndDownloadImage = async (imgData, signal) => {
       // Use PER-IMAGE settings
-      const tSize = imgData.targetSize || 100
-      const tUnit = imgData.targetUnit || "KB"
       const tFormat = imgData.targetFormat || "original"
+      const mode = imgData.resizeMode || 'size'
 
-      const targetSizeBytes = tSize * (tUnit === "KB" ? 1024 : 1024 * 1024)
+      let targetSizeBytes = 0
+      let qualityVal = 0.9
 
-      // 1. Min Size Check
-      if (targetSizeBytes < 5 * 1024) {
-          return { success: false, error: `Skipped ${imgData.name}: Target size < 5KB.` }
-      }
+      if (mode === 'size') {
+          const tSize = imgData.targetSize || 100
+          const tUnit = imgData.targetUnit || "KB"
+          targetSizeBytes = tSize * (tUnit === "KB" ? 1024 : 1024 * 1024)
 
-      // 2. Max Size Check (Target > Original)
-      const targetBytesInt = Math.floor(targetSizeBytes)
-      
-      if (targetBytesInt > imgData.size) {
-          const targetKB = (targetBytesInt / 1024).toFixed(4)
-          const originalKB = (imgData.size / 1024).toFixed(4)
-          
-          return { 
-              success: false, 
-              error: `Cannot reduce ${imgData.name}: Target size exceeds original size.`
+          // 1. Min Size Check
+          if (targetSizeBytes < 5 * 1024) {
+              return { success: false, error: `Skipped ${imgData.name}: Target size < 5KB.` }
           }
+          // 2. Max Size Check
+          const targetBytesInt = Math.floor(targetSizeBytes)
+          if (targetBytesInt > imgData.size) {
+            return { success: false, error: `Cannot reduce ${imgData.name}: Target size exceeds original size.` }
+          }
+      } else {
+          // Quality Mode (Now "Relative Size Mode")
+          const qStr = imgData.targetQuality || '0.9'
+          
+          if (qStr === 'min') {
+              // MIN: Target 5KB
+              targetSizeBytes = 5 * 1024
+          } else if (qStr === 'max') {
+              // MAX: Original Size
+              // If format is same, we return success immediately below
+              targetSizeBytes = imgData.size
+          } else {
+              // Percentage of ORIGINAL SIZE
+              const percent = parseFloat(qStr)
+              targetSizeBytes = imgData.size * percent
+          }
+
+          // MIN safety for relative calculations
+          if (targetSizeBytes < 5 * 1024) targetSizeBytes = 5120
       }
 
       try {
-          // Pass the image-specific format
-          const processedBlob = await processImageToSize(imgData, targetBytesInt, tFormat)
+          let processedBlob = null
+          
+          // Optimization: If Quality Mode = MAX and format matches, use original
+          if (mode === 'quality' && imgData.targetQuality === 'max' && tFormat === imgData.type) {
+             // Fetch original blob
+             const response = await fetch(imgData.url)
+             processedBlob = await response.blob()
+          } else {
+             // Process to target size (Using 'size' mode logic for everything now)
+             // We pass 'size' as mode to enforce binary search/resizing to hit targetBytes
+             processedBlob = await processImageToSize(imgData, targetSizeBytes, tFormat, signal, 'size')
+          }
           
           if (!processedBlob) {
               return { success: false, error: `Could not process ${imgData.name}` }
@@ -186,25 +236,97 @@ const Home = () => {
           
           return { success: true }
       } catch (e) {
+          if (e.message === 'Aborted') throw e
           console.error("Reduction failed", e)
           return { success: false, error: `Error reducing ${imgData.name}` }
       }
   }
 
-  const handleSingleDownload = async (id) => {
+  const handleSingleDownload = (id) => {
+     // If already processing or queued, do nothing
+     if (processingIds.has(id) || queue.includes(id)) return
+     setQueue(prev => [...prev, id])
+  }
+
+  // Effect to process queue
+  useEffect(() => {
+      const CONCURRENCY_LIMIT = 2
+      
+      if (processingIds.size < CONCURRENCY_LIMIT && queue.length > 0) {
+          const nextId = queue[0]
+          setQueue(prev => prev.slice(1)) // Remove from queue
+          performDownload(nextId)
+      }
+  }, [queue, processingIds.size])
+
+  const performDownload = async (id) => {
       const img = images.find(i => i.id === id)
       if (!img) return
       
-      setProcessingId(id)
-      const result = await processAndDownloadImage(img)
+      const controller = new AbortController()
+      abortControllers.current[id] = controller
+
+      setProcessingIds(prev => new Set(prev).add(id))
+      
+      let result = { success: false }
+      try {
+        result = await processAndDownloadImage(img, controller.signal)
+      } catch (e) {
+        if (e.message === 'Aborted') {
+            console.log('Download cancelled')
+            // Don't alert on cancel
+            return 
+        }
+        result = { success: false, error: e.message }
+      } finally {
+        // Cleanup controller
+        delete abortControllers.current[id]
+        // Use functional state update to ensure we have latest state
+        setProcessingIds(prev => {
+            const next = new Set(prev)
+            next.delete(id)
+            return next
+        })
+      }
+
       if (!result.success) {
           alert(result.error)
       }
-      setProcessingId(null)
+
+      if (result.success) {
+          setSuccessIds(prev => new Set(prev).add(id))
+          setTimeout(() => {
+              setSuccessIds(prev => {
+                  const next = new Set(prev)
+                  next.delete(id)
+                  return next
+              })
+          }, 2000)
+      }
+  }
+
+  const handleCancelDownload = (id) => {
+      // 1. If in queue, just remove from queue
+      if (queue.includes(id)) {
+          setQueue(prev => prev.filter(qId => qId !== id))
+          return
+      }
+
+      // 2. If processing, abort
+      const controller = abortControllers.current[id]
+      if (controller) {
+          controller.abort()
+          delete abortControllers.current[id]
+          setProcessingIds(prev => {
+              const next = new Set(prev)
+              next.delete(id)
+              return next
+          })
+      }
   }
 
   // Core processing logic
-  const processImageToSize = async (imgData, targetBytes, specificFormat) => {
+  const processImageToSize = async (imgData, targetBytes, specificFormat, signal, mode = 'size', fixedQuality = 0.9) => {
       const img = new Image()
       img.src = imgData.url
       await img.decode()
@@ -221,13 +343,29 @@ const Home = () => {
       
       const isPng = outputType === "image/png"
 
-      // Binary Search Function for Quality
+      // 1. QUALITY MODE SHORTCUT
+      if (mode === 'quality') {
+          // Just render with fixed quality at original dimensions
+          const canvas = document.createElement("canvas")
+          canvas.width = width
+          canvas.height = height
+          const ctx = canvas.getContext("2d")
+          if (!isPng) {
+              ctx.fillStyle = "#FFFFFF"
+              ctx.fillRect(0, 0, width, height)
+          }
+          ctx.drawImage(img, 0, 0, width, height)
+          return new Promise(resolve => canvas.toBlob(resolve, outputType, fixedQuality))
+      }
+
+      // 2. Binary Search Function for Quality (SIZE MODE)
       const findBestQuality = async (w, h) => {
           let minQ = 0.0, maxQ = 1.0
           let bestBlob = null
           const iterations = isPng ? 1 : 30 
 
           for (let i = 0; i < iterations; i++) {
+              if (signal?.aborted) throw new Error("Aborted")
               let quality = (minQ + maxQ) / 2
               if (i === 0) quality = 0.92
               
@@ -278,6 +416,7 @@ const Home = () => {
       if (!bestBlob) { 
           let scale = 0.9
           while (scale > 0.05) { 
+              if (signal?.aborted) throw new Error("Aborted") 
               const w = Math.floor(width * scale)
               const h = Math.floor(height * scale)
               
@@ -336,6 +475,14 @@ const Home = () => {
     fileInputRef.current?.click()
   }, [])
 
+  const handleMouseDown = useCallback((e) => {
+    // Only trigger if clicking directly on dropzone or placeholder, NOT on children (like cards)
+    if (e.target.closest(`.${styles.card}`)) return
+    setIsActive(true)
+  }, [])
+
+  const handleMouseUp = useCallback(() => setIsActive(false), [])
+
   return (
     <div className={styles.container}>
       <header>
@@ -352,11 +499,15 @@ const Home = () => {
         <div style={{position: 'relative', marginTop:'40px'}}>
 
         <div
-          className={`${styles.dropZone} ${isDragging ? styles.dragging : ''}`}
+          className={`${styles.dropZone} ${isDragging ? styles.dragging : ''} ${isActive ? styles.active : ''}`}
           onDragEnter={onDragEnter}
           onDragOver={onDragOver}
           onDragLeave={onDragLeave}
           onDrop={onDrop}
+          onClick={handleBrowse}
+          onMouseDown={handleMouseDown}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseUp}
         >
           <input
             type="file"
@@ -367,7 +518,13 @@ const Home = () => {
             multiple
           />
           
-          {images.length === 0 && (
+          {isProcessing && (
+            <div className={styles.loadingOverlay}>
+              <p style={{color: '#3b6c9b', fontWeight: 'bold'}}>Loading...</p>
+            </div>
+          )}
+
+          {images.length === 0 && !isProcessing && (
              <div className={styles.placeholder} onClick={handleBrowse} style={{cursor: 'pointer'}}>
                  <p style={{fontSize: '1.2rem', color: '#8892b0'}}>Load Images</p>
                  <p style={{fontSize: '0.9rem'}}>Drag & Drop or Click to Browse</p>
@@ -376,14 +533,18 @@ const Home = () => {
 
           <div className={styles.grid}>
              {images.map(img => (
-                 <ImageCard 
-                    key={img.id} 
-                    image={img} 
-                    onRemove={removeImage} 
-                    onUpdate={handleImageUpdate}
-                    onDownload={handleSingleDownload}
-                    isProcessing={processingId === img.id}
-                 />
+                  <div key={img.id} onClick={(e) => e.stopPropagation()} onMouseDown={(e) => e.stopPropagation()}>
+                    <ImageCard 
+                        image={img} 
+                        onRemove={removeImage} 
+                        onUpdate={handleImageUpdate}
+                        onDownload={handleSingleDownload}
+                        onCancel={handleCancelDownload}
+                        isProcessing={processingIds.has(img.id)}
+                        isQueued={queue.includes(img.id)}
+                        isSuccess={successIds.has(img.id)}
+                    />
+                  </div>
              ))}
           </div>
         </div>
