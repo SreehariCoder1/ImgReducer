@@ -64,9 +64,8 @@ export const ImageCard = ({
   const currentType = image.type 
 
   // Validation
-  // const targetBytes = (image.targetSize || 0) * ((image.targetUnit || 'KB') === 'KB' ? 1024 : 1024 * 1024)
-  // const isInvalid = targetBytes > image.size
   const targetBytes = (image.targetSize || 0) * ((image.targetUnit || 'KB') === 'KB' ? 1024 : 1024 * 1024)
+  const isInvalid = targetBytes < 5120 && (image.targetSize > 0)
   const percentChange = Math.round(((targetBytes - image.size) / image.size) * 100)
 
   return (
@@ -111,7 +110,7 @@ export const ImageCard = ({
                         {/* 1. Size Input */}
                         <input 
                             type="number" 
-                            className={`${styles.cardInput}`}
+                            className={`${styles.cardInput} ${isInvalid ? styles.inputError : ''}`}
                             value={image.targetSize ?? ''}
                             onChange={handleSizeChange}
                             min={(image.targetUnit || 'KB') === 'KB' ? "5" : "0.005"}
