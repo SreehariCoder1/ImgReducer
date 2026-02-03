@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useCallback } from "react"
 import styles from "../styles/Home.module.css"
 import heic2any from "heic2any"
 import { ImageCard } from "./ImageCard"
+import Features from "./Features"
 import ImageWorker from "../workers/image.worker?worker"
 import { saveImageToDB, getImagesFromDB, deleteImageFromDB, updateImageInDB } from "../utils/db"
 
@@ -13,25 +14,31 @@ const Home = () => {
   // Mounted flag to prevent strict mode double-load issues if needed, 
   // though simple useEffect([]) is usually fine.
   
-  // Load images from DB on mount
-  useEffect(() => {
+    // Load images from DB on mount
+    useEffect(() => {
     const loadImages = async () => {
         try {
             const storedImages = await getImagesFromDB()
             if (storedImages && storedImages.length > 0) {
-                // We need to revoke old URLs if we are strictly managing them, 
-                // but here we are just loading new blobs.
-                // We must create fresh URLs for the blobs.
-                const initializedImages = await Promise.all(storedImages.map(async img => {
-                    // Re-create object URL for the blob
-                    // The 'url' property in DB might be stale/invalid, so regenerate it.
-                    // Actually, we shouldn't store the URL in DB as it's a blob: protocol.
-                    // We store the File/Blob.
-                    // Let's create a new URL.
+                const EXPIRATION_TIME_MS = 24 * 60 * 60 * 1000 // 24 Hours
+                const now = Date.now()
+                
+                const validImages = []
+                
+                for (const img of storedImages) {
+                    // Check Expiration (with fallback for legacy images without timestamp)
+                    if (img.createdAt && (now - img.createdAt > EXPIRATION_TIME_MS)) {
+                        // Expired: Delete from DB
+                        await deleteImageFromDB(img.id)
+                        continue 
+                    }
+                    
+                    // Valid: Recreate URL
                     const url = URL.createObjectURL(img.file)
-                    return { ...img, url }
-                }))
-                setImages(initializedImages)
+                    validImages.push({ ...img, url })
+                }
+                
+                setImages(validImages)
             }
         } catch (e) {
             console.error("Failed to load images from DB:", e)
@@ -39,6 +46,7 @@ const Home = () => {
     }
     loadImages()
   }, []) 
+
   // isProcessing global used for drag/drop loading. 
   // We use processingId for individual downloads.
   const [isProcessing, setIsProcessing] = useState(false)
@@ -227,7 +235,7 @@ const Home = () => {
             if (defaultFormat === 'image/svg+xml' || defaultFormat === 'image/avif') {
                 defaultFormat = 'image/jpeg'
             }
-            
+
             // Safe ID generation (Android/older browser compatibility)
             const safeId = Date.now().toString(36) + Math.random().toString(36).substr(2)
 
@@ -244,7 +252,8 @@ const Home = () => {
                 targetUnit: "KB",
                 targetFormat: defaultFormat,
                 resizeMode: 'size',
-                targetQuality: '0.9'
+                targetQuality: '0.9',
+                createdAt: Date.now() // Timestamp for auto-deletion
             }
 
             newImages.push(newImgObj)
@@ -293,32 +302,48 @@ const Home = () => {
     }
   }, [processFiles])
 
+  // Exiting state for animation
+  const [exitingIds, setExitingIds] = useState(new Set())
+
   /* ----------------------------- Actions ----------------------------- */
   const removeImage = (id) => {
-    // 1. ABORT any ongoing processing for this image
-    const controller = abortControllers.current[id]
-    if (controller) {
-        controller.abort()
-        delete abortControllers.current[id]
-    }
+    // 1. Add to exiting state for animation
+    setExitingIds(prev => new Set(prev).add(id))
 
-    // 2. Remove from processing state
-    setProcessingIds(prev => {
-        const next = new Set(prev)
-        next.delete(id)
-        return next
-    })
+    // 2. Schedule actual removal after animation
+    setTimeout(() => {
+        // ABORT any ongoing processing for this image
+        const controller = abortControllers.current[id]
+        if (controller) {
+            controller.abort()
+            delete abortControllers.current[id]
+        }
+    
+        // Remove from processing state
+        setProcessingIds(prev => {
+            const next = new Set(prev)
+            next.delete(id)
+            return next
+        })
+    
+        // Remove from queue if present
+        setQueue(prev => prev.filter(qId => qId !== id))
+    
+        // Remove from state and cleanup blob URL
+        setImages(prev => {
+            const target = prev.find(i => i.id === id)
+            if (target) URL.revokeObjectURL(target.url)
+            deleteImageFromDB(id).catch(console.error)
+            return prev.filter(i => i.id !== id)
+        })
 
-    // 3. Remove from queue if present
-    setQueue(prev => prev.filter(qId => qId !== id))
-
-    // 4. Remove from state and cleanup blob URL
-    setImages(prev => {
-        const target = prev.find(i => i.id === id)
-        if (target) URL.revokeObjectURL(target.url)
-        deleteImageFromDB(id).catch(console.error)
-        return prev.filter(i => i.id !== id)
-    })
+        // Clear from exitingIds
+        setExitingIds(prev => {
+            const next = new Set(prev)
+            next.delete(id)
+            return next
+        })
+    }, 300) // Match CSS transition time
   }
 
   const processAndDownloadImage = async (imgData, signal) => {
@@ -526,7 +551,9 @@ const Home = () => {
                       const bitmap = await createImageBitmap(img)
                       
                       // Iterations (passed from user setting/constants)
-                      const iterations = outputType === 'image/png' ? 1 : 10
+                      let iterations = 10
+                      if (outputType === 'image/png') iterations = 1
+                      if (outputType === 'image/webp') iterations = 1
 
                       // Send to Worker
                       worker.postMessage({
@@ -581,7 +608,10 @@ const Home = () => {
       const findBestQuality = async (w, h) => {
           let minQ = 0.0, maxQ = 1.0
           let bestBlob = null
-          const iterations = isPng ? 1 : 10 
+          
+          let iterations = 10 
+          if (isPng) iterations = 5
+          if (outputType === 'image/webp') iterations = 5
 
           for (let i = 0; i < iterations; i++) {
               if (signal?.aborted) throw new Error("Aborted")
@@ -720,8 +750,10 @@ const Home = () => {
         </div>
       </header>
 
-      <main>
+      <main className={styles.main}>
         <h1 className={styles.title}>Resize Your Images</h1>
+
+        <div className={styles.info}><span>Supported formats: JPG/JPEG, PNG, SVG, WebP, HEIC, AVIF</span><div><span className={styles.info_secondary}>Insert limit: 10 images,</span><span className={styles.info_secondary}>Max: 30MB,</span><span>Min: 5KB</span></div></div>
         
         {warningMsg && (
             <div className={styles.warningToast}>
@@ -729,10 +761,9 @@ const Home = () => {
             </div>
         )}
 
-        <div style={{position: 'relative', marginTop:'40px'}}>
+        <div style={{position: 'relative'}}>
 
-        <div
-          className={`${styles.dropZone} ${isDragging ? styles.dragging : ''} ${isActive ? styles.active : ''}`}
+        <div className={`${styles.dropZone} ${isDragging ? styles.dragging : ''} ${isActive ? styles.active : ''}`}
           onDragEnter={onDragEnter}
           onDragOver={onDragOver}
           onDragLeave={onDragLeave}
@@ -758,9 +789,10 @@ const Home = () => {
           )}
 
           {images.length === 0 && !isProcessing && (
-             <div className={styles.placeholder} onClick={handleBrowse} style={{cursor: 'pointer'}}>
-                 <p style={{fontSize: '1.2rem', color: '#8892b0'}}>Load Images</p>
-                 <p style={{fontSize: '0.9rem'}}>Drag & Drop or Click to Browse</p>
+             <div className={styles.placeholder} onClick={handleBrowse}>
+                <img src="/drop-zone_image.png" alt="drop-zone" className={styles.dropZone_Image}/>
+                 <p className={styles.dropZoneText}>Load Images</p>
+                 <span className={styles.dropZoneTextTwo}>Drag & drop, paste, or click to</span><span className={styles.dropZoneTextThree}>browse</span>
              </div>
           )}
 
@@ -776,6 +808,7 @@ const Home = () => {
                         isProcessing={processingIds.has(img.id)}
                         isQueued={queue.includes(img.id)}
                         isSuccess={successIds.has(img.id)}
+                        isExiting={exitingIds.has(img.id)}
                     />
                   </div>
              ))}
@@ -784,6 +817,8 @@ const Home = () => {
 
         </div> 
         {/* Global Controls Removed */}
+        
+        <Features />
       </main>
     </div>
   )

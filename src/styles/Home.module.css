@@ -18,20 +18,58 @@
     font-size: 1.5em;
 }
 
+.main {
+  margin: 0 0.5em;
+}
+
 .title {
     margin: 0.9em 0 0.9em 0;
     text-align: center;
 }
 
+.info {
+  color: #ef4444;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.2em;
+}
+
+.info_secondary {
+  margin-right: 0.9em;
+}
 /* Match reference dashed border container */
 .dropZone {
-  border: 2px dashed #8892b0;
-  border-radius: 12px;
-  min-height: 400px;
-  padding: 20px;
-  background-color: #fff;
-  position: relative;
-  transition: all 0.2s ease;
+  cursor: pointer;
+    border: 0.2em dashed #8892b0;
+    border-radius: 1em;
+    height: 60vh;
+    padding: 1em;
+    background-color: #effaff;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.dropZone_Image {
+width: 10em;
+}
+
+.dropZoneText {
+    font-size: larger;
+    color: black;
+}
+
+.dropZoneTextTwo {
+    font-size: x-large;
+    font-weight: bold;
+    color: black;
+    margin-right: 0.5em;
+}
+
+.dropZoneTextThree {
+    font-size: xx-large;
+    font-weight: bold;
+    color: #267bf8;
+    text-decoration: underline;
 }
 
 .dropZone.dragging {
@@ -55,6 +93,7 @@
 
 .placeholder {
   position: absolute;
+  width: 100%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -63,176 +102,8 @@
   pointer-events: none;
 }
 
-/* Image Card Styles */
-.card {
-  background: white;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  position: relative;
-}
-
-.cardHeader {
-  /* Only Close button now */
-  position: absolute; 
-  top: 5px;
-  right: 5px;
-  z-index: 10;
-}
-
-.imageContainer {
-  height: 200px;
-  background-image:
-    linear-gradient(45deg, #eee 25%, transparent 25%),
-    linear-gradient(-45deg, #eee 25%, transparent 25%),
-    linear-gradient(45deg, transparent 75%, #eee 75%),
-    linear-gradient(-45deg, transparent 75%, #eee 75%);
-  background-size: 20px 20px;
-  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.cardImage {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.closeBtn {
-  background: white;
-  border: none;
-  font-size: 1.5rem;
-  color: #333;
-  cursor: pointer;
-  line-height: 1;
-  padding: 0;
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.cardInfo {
-  padding: 15px;
-  background-color: #3b6c9b; 
-  color: white;
-}
-
-/* New Layout for Card Info */
-.infoRow {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-}
-
-.fileName {
-  font-weight: 600;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 65%;
-  font-size: 0.95rem;
-}
-
-.selectContainer {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 0.85rem;
-}
-
-.selectLabel {
-    opacity: 0.9;
-}
-
-.selectBox {
-    cursor: pointer;
-    width: 16px;
-    height: 16px;
-}
-
-/* Grid for file details */
-.detailsGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px 12px;
-  margin: 10px 0;
-  font-size: 0.85rem;
-}
-
-.detailItem {
-  display: flex;
-  flex-direction: column;
-}
-
-.detailLabel {
-  font-size: 0.75rem;
-  opacity: 0.8;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.detailValue {
-  font-weight: 600;
-}
-
-.cardDownloadBtn {
-    margin-top: 10px;
-    width: 100%;
-    background-color: #ffffff;
-    color: #3b6c9b;
-    border: none;
-    padding: 6px;
-    border-radius: 4px;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 0.9rem;
-    transition: background 0.2s;
-}
-
-.cardDownloadBtn:hover {
-    background-color: #f1f5f9;
-}
-
-
-/* Card Inteactive Elements */
-.cardInput {
-  flex: 1;
-  width: 50%;
-  padding: 4px;
-  border: 1px solid rgba(255,255,255,0.3);
-  background: rgba(255,255,255,0.1);
-  color: white;
-  border-radius: 4px;
-  font-size: 0.85rem;
-}
-
-.cardSelect {
-  padding: 4px;
-  border: 1px solid rgba(255,255,255,0.3);
-  background: rgba(255,255,255,0.1);
-  color: white; /* Ensure text is visible on dark card background */
-  border-radius: 4px;
-  font-size: 0.85rem;
-  cursor: pointer;
-}
-
-.cardSelect option {
-    background-color: #3b6c9b; /* Match card background for options */
-    color: white;
-}
-
-/* Removed global controls styles */
+/* Image Card Styles Removed */
+/* Moved to ImageCard.module.css */
 
 
 /* media queries */
@@ -245,6 +116,13 @@
 @media (max-width: 640px) {
   .grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 840px) {
+  .info {
+    flex-direction: column;
+    font-size: x-small;
   }
 }
 

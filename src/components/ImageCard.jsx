@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '../styles/Home.module.css'
+import styles from '../styles/ImageCard.module.css'
 
 export const ImageCard = ({ 
     image, 
@@ -9,7 +9,8 @@ export const ImageCard = ({
     onCancel,
     isProcessing,
     isSuccess,
-    isQueued
+    isQueued,
+    isExiting
 }) => {
   const originalSize = (image.size / 1024).toFixed(2)
   const originalFormat = image.type.split('/')[1]?.toUpperCase() || 'UNKNOWN'
@@ -69,7 +70,7 @@ export const ImageCard = ({
   const percentChange = Math.round(((targetBytes - image.size) / image.size) * 100)
 
   return (
-    <div className={styles.card}>
+    <div className={`${styles.card} ${isExiting ? styles.exiting : ''}`}>
       <div className={styles.cardHeader}>
         <button 
             className={styles.closeBtn} 

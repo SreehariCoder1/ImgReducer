@@ -1,0 +1,54 @@
+.container {
+  max-width: 1200px;
+  margin: 60px auto;
+  padding: 0 20px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px;
+  text-align: center;
+}
+
+.feature {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.icon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #1a1a1a;
+}
+
+.description {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #666;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+/* Response to dark mode if parent has it, otherwise default light/clean style as requested */
+@media (prefers-color-scheme: dark) {
+  .title {
+    color: #f0f0f0;
+  }
+  .description {
+    color: #a0a0a0;
+  }
+  .icon {
+    color: #f0f0f0;
+  }
+}
