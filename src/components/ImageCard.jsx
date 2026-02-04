@@ -86,14 +86,11 @@ export const ImageCard = ({
       </div>
 
       <div className={styles.cardInfo}>
-        <div className={styles.infoRow}>
             <div className={styles.fileName} title={image.name}>
                 {image.name}
             </div>
-            {/* Selection removed */}
-        </div>
-        
-        <div className={styles.detailsGrid}>
+     
+           <div className={styles.detailsGrid}>
             <div className={styles.detailItem}>
                 <span className={styles.detailLabel}>Size:</span>
                 <span className={styles.detailValue}>{originalSize} KB</span>
@@ -104,10 +101,10 @@ export const ImageCard = ({
             </div>
             
 
-            <div className={styles.detailItem} style={{gridColumn: 'span 2', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px'}}>
-                 <div style={{display:'flex', flexDirection:'column'}}>
+            <div className={styles.controlsContainer}>
+                 <div className={styles.controlGroup}>
                     <span className={styles.detailLabel}>New Size:</span>
-                    <div style={{display:'flex', gap:'2px', alignItems: 'center'}}>
+                    <div className={styles.inputsRow}>
                         {/* 1. Size Input */}
                         <input 
                             type="number" 
@@ -134,7 +131,6 @@ export const ImageCard = ({
                                     onUpdate(image.id, 'targetQuality', val)
                                 }
                             }}
-                            style={{minWidth: '90px'}}
                             title="Select Quality Preset or Custom Size"
                         >
                             <option value="custom">Custom Size</option>
@@ -167,12 +163,7 @@ export const ImageCard = ({
 
                     {/* Percentage Display */}
                     {(image.resizeMode !== 'quality') && (
-                        <span style={{
-                            fontSize: '0.75rem', 
-                            marginTop: '2px', 
-                            color: '#cbd5e1', 
-                            whiteSpace: 'nowrap'
-                        }}>
+                        <span className={styles.percentChange}>
                             ({percentChange > 0 ? '+' : ''}{percentChange}%)
                         </span>
                     )}
@@ -180,7 +171,7 @@ export const ImageCard = ({
 
                  </div>
 
-                 <div style={{display:'flex', flexDirection:'column'}}>
+                 <div className={styles.controlGroup}>
                     <span className={styles.detailLabel}>New Format:</span>
                     <select 
                         className={styles.cardSelect}
@@ -196,7 +187,7 @@ export const ImageCard = ({
             </div>
         </div>
 
-        <div style={{display: 'flex', gap: '8px', alignItems: 'center'}}>
+        <div className={styles.downloadBtnContainer}>
             {(isProcessing || isQueued) && (
                 <button
                     className={styles.cardDownloadBtn}
@@ -221,7 +212,7 @@ export const ImageCard = ({
                 style={{
                     opacity: (isProcessing || isQueued) ? 0.7 : 1, 
                     cursor: (isProcessing || isQueued) ? 'wait' : 'pointer',
-                    backgroundColor: isSuccess ? '#4ade80' : ((isQueued) ? '#eab308' : '#ffffff'), // Yellow for queued
+                    backgroundColor: isSuccess ? '#4ade80' : ((isQueued) ? '#eab308' : '#ffffff'), 
                     color: isSuccess ? '#ffffff' : ((isQueued) ? '#ffffff' : '#3b6c9b'),
                     transition: 'all 0.3s ease'
                 }}

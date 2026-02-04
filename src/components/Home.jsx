@@ -63,7 +63,7 @@ const Home = () => {
   
   const showToast = useCallback((msg) => {
       setWarningMsg(msg)
-      setTimeout(() => setWarningMsg(null), 5000)
+      setTimeout(() => setWarningMsg(null), 10000)
   }, [])
   
   // Handler to update specific property for a specific image
@@ -709,10 +709,8 @@ const Home = () => {
   const onDragLeave = useCallback((e) => {
     e.preventDefault()
     dragCounter.current -= 1
-    // Verify if items are actually still being dragged instead of trusting counter
-    if (!e.dataTransfer.items || e.dataTransfer.items.length === 0) {
+    if (dragCounter.current === 0) {
       setIsDragging(false)
-      dragCounter.current = 0 // Reset counter to prevent sync issues
     }
   }, [])
 
@@ -761,7 +759,7 @@ const Home = () => {
             </div>
         )}
 
-        <div style={{position: 'relative'}}>
+        <div className={styles.dropZoneContainer}>
 
         <div className={`${styles.dropZone} ${isDragging ? styles.dragging : ''} ${isActive ? styles.active : ''}`}
           onDragEnter={onDragEnter}
@@ -784,7 +782,7 @@ const Home = () => {
           
           {isProcessing && (
             <div className={styles.loadingOverlay}>
-              <p style={{color: '#3b6c9b', fontWeight: 'bold'}}>Loading...</p>
+              Loading...
             </div>
           )}
 

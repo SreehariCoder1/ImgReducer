@@ -1,16 +1,15 @@
 /* Image Card Styles */
 .card {
-  background: white;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  transition: all 0.3s ease;
-  opacity: 1;
-  transform: scale(1);
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.7em;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: all 0.3s ease;
+    opacity: 1;
+    transform: scale(1);
 }
 
 .exiting {
@@ -20,25 +19,21 @@
 }
 
 .cardHeader {
-  position: absolute; 
-  top: 5px;
-  right: 5px;
-  z-index: 10;
+    position: absolute;
+    top: 0.4em;
+    right: 0.4em;
+    z-index: 10;
 }
 
 .imageContainer {
-  height: 200px;
-  background-image:
-    linear-gradient(45deg, #eee 25%, transparent 25%),
-    linear-gradient(-45deg, #eee 25%, transparent 25%),
-    linear-gradient(45deg, transparent 75%, #eee 75%),
-    linear-gradient(-45deg, transparent 75%, #eee 75%);
-  background-size: 20px 20px;
-  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
+    height: 14em;
+    background-image: linear-gradient(45deg, #eee 25%, transparent 25%), linear-gradient(-45deg, #eee 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #eee 75%), linear-gradient(-45deg, transparent 75%, #eee 75%);
+    background-size: 2em 1em;
+    background-position: 0 0, 0 0.6em, 0.6em -0.6em, -0.6em 0em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
 }
 
 .cardImage {
@@ -48,85 +43,52 @@
 }
 
 .closeBtn {
-  background: white;
-  border: none;
-  font-size: 1.5rem;
-  color: #333;
-  cursor: pointer;
-  line-height: 1;
-  padding: 0;
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background: white;
+    border: none;
+    font-size: 1.5em;
+    color: #333;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 1em;
+    height: 1em;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .cardInfo {
-  padding: 15px;
-  background-color: #3b6c9b; 
-  color: white;
+    padding: 0.7em;
+    background-color: #3b6c9b;
+    color: white;
 }
 
 /* New Layout for Card Info */
-.infoRow {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-}
 
 .fileName {
-  font-weight: 600;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 65%;
-  font-size: 0.95rem;
-}
-
-.selectContainer {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 0.85rem;
-}
-
-.selectLabel {
-    opacity: 0.9;
-}
-
-.selectBox {
-    cursor: pointer;
-    width: 16px;
-    height: 16px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* Grid for file details */
 .detailsGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px 12px;
-  margin: 10px 0;
-  font-size: 0.85rem;
-}
-
-.detailItem {
-  display: flex;
-  flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.4em 0.6em;
+    margin: 0.7em 0;
+    font-size: small;
 }
 
 .detailLabel {
-  font-size: 0.75rem;
-  opacity: 0.8;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+    letter-spacing: 0.1em;
+    margin-right: 0.3em;
+    color: mediumspringgreen;
+    font-size: 0.9rem;
 }
 
 .detailValue {
   font-weight: 600;
+  font-size: 0.9rem;
 }
 
 .cardDownloadBtn {
@@ -139,35 +101,38 @@
     border-radius: 4px;
     font-weight: bold;
     cursor: pointer;
-    font-size: 0.9rem;
+    font-size: 1em;
     transition: background 0.2s;
 }
 
 .cardDownloadBtn:hover {
-    background-color: #f1f5f9;
+    background-color: #0b0c0c !important;
 }
 
 
 /* Card Inteactive Elements */
 .cardInput {
-  flex: 1;
-  width: 50%;
-  padding: 4px;
-  border: 1px solid rgba(255,255,255,0.3);
-  background: rgba(255,255,255,0.1);
-  color: white;
-  border-radius: 4px;
-  font-size: 0.85rem;
+    flex: 1;
+    width: 50%;
+    padding: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    min-width: 6em;
 }
 
 .cardSelect {
-  padding: 4px;
-  border: 1px solid rgba(255,255,255,0.3);
-  background: rgba(255,255,255,0.1);
-  color: white; /* Ensure text is visible on dark card background */
-  border-radius: 4px;
-  font-size: 0.85rem;
-  cursor: pointer;
+    padding: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    min-width: 3em;
+    flex-shrink: 0;
 }
 
 .cardSelect option {
@@ -179,4 +144,53 @@
   border: 1px solid #ef4444 !important;
   background-color: rgba(239, 68, 68, 0.1) !important;
   color: #ef4444 !important;
+}
+
+/* Responsive Controls Layout */
+.controlsContainer {
+    grid-column: span 2;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8em;
+}
+
+.controlGroup {
+    flex: 1 1 9em;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.inputsRow {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.percentChange {
+    margin-top: 2px;
+    color: rgb(203, 213, 225);
+    white-space: nowrap;
+    font-size: 1rem;
+}
+
+.downloadBtnContainer {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+/* media queries */
+@media (max-width: 425px) {
+.cardInput, .cardSelect {
+    font-size: 0.8em;
+}
+
+.detailLabel, .detailValue {
+    font-size: 0.7rem;
+}
+
+.percentChange {
+    font-size: 0.8rem;
+}
 }
