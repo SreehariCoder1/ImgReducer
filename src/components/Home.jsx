@@ -748,7 +748,7 @@ const Home = () => {
         </div>
       </header>
 
-      <main className={styles.main}>
+      <main>
         <h1 className={styles.title}>Resize Your Images</h1>
 
         <div className={styles.info}><span>Supported formats: JPG/JPEG, PNG, SVG, WebP, HEIC, AVIF</span><div><span className={styles.info_secondary}>Insert limit: 10 images,</span><span className={styles.info_secondary}>Max: 30MB,</span><span>Min: 5KB</span></div></div>
@@ -814,10 +814,17 @@ const Home = () => {
         </div>
 
         </div> 
-        {/* Global Controls Removed */}
-        
-        <Features />
+      
       </main>
+      <Features />
+
+      <footer>
+        <div className={styles.footerContainer}>
+        <span className={styles.footerText}>© 2026 ImgReducer. All rights reserved.</span>
+        <a href="mailto:imgreducer@gmailcom" className={styles.email}> Email Us</a>
+        </div>
+      </footer>
+
     </div>
   )
 }

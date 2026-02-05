@@ -1,54 +1,73 @@
 .container {
-  max-width: 1200px;
-  margin: 60px auto;
-  padding: 0 20px;
+    width: 80vw;
+    margin: 3em auto;
 }
 
 .grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 40px;
-  text-align: center;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(16rem, 1fr));
+    gap: 2em;
+    text-align: center;
 }
 
 .feature {
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .icon {
-  width: 48px;
-  height: 48px;
-  margin-bottom: 20px;
-  color: #333;
+    width: 3rem;
+    height: 3rem;
+    color: #333;
 }
 
 .title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 15px;
-  color: #1a1a1a;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.4em;
+    color: #1a1a1a;
 }
 
 .description {
-  font-size: 1rem;
-  line-height: 1.6;
-  color: #666;
-  max-width: 300px;
-  margin: 0 auto;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #666;
 }
 
-/* Response to dark mode if parent has it, otherwise default light/clean style as requested */
-@media (prefers-color-scheme: dark) {
-  .title {
-    color: #f0f0f0;
-  }
-  .description {
-    color: #a0a0a0;
-  }
-  .icon {
-    color: #f0f0f0;
-  }
+/* media queries */
+
+@media (min-width: 1024px) and (max-width: 1440px) {
+ .container {
+  width: 90vw;
+ }
 }
+
+@media (min-width: 768px) and (max-width: 1023px) {
+ .grid {
+  grid-template-columns: repeat(2, minmax(16rem, 1fr));
+ }
+}
+
+@media (min-width: 500px) and (max-width: 768px) {
+ .grid {
+  grid-template-columns: repeat(2, minmax(11rem, 1fr));
+ }
+}
+
+@media (max-width: 768px) {
+.title {
+  font-size: 1rem;
+}
+
+.description {
+  font-size: 0.8rem;
+}
+}
+
+@media (max-width: 500px) {
+ .grid {
+  grid-template-columns: repeat(1, minmax(16rem, 1fr));
+ }
+}
+
