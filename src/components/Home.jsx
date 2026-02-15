@@ -858,7 +858,7 @@ const Home = () => {
     <div className={styles.container}>
       <SEO
         title="ImgReducer | Resize, Compress & Convert Images Online FREE"
-        description="Free online image resizer, compressor, and converter. Reduce JPG, PNG, WEBP, HEIC images without losing quality."
+        description="Free online image resizer, compressor, and converter. Reduce JPG/JPEG, PNG, SVG, WEBP, HEIC, and AVIF image size instantly without losing quality."
         url="https://www.img-reducer.com"
       />
 
