@@ -1,12 +1,12 @@
-import { Helmet } from 'react-helmet-async';
+import { Helmet } from "react-helmet-async";
 
-export default function SEO({ 
-  title, 
-  description, 
-  name = 'ImgReducer', 
-  type = 'website',
-  url = 'https://img-reducer.com',
-  image = 'https://imgreducer.netlify.app/og-image.jpg'
+export default function SEO({
+  title,
+  description,
+  name = "ImgReducer",
+  type = "website",
+  url = "https://www.img-reducer.com",
+  image = "https://imgreducer.netlify.app/og-image.jpg",
 }) {
   return (
     <Helmet>
