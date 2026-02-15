@@ -1,4 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react"
+import { Helmet } from "react-helmet-async"
+import SEO from "./SEO"
 import styles from "../styles/Home.module.css"
 import heic2any from "heic2any"
 import { ImageCard } from "./ImageCard"
@@ -740,6 +742,50 @@ const Home = () => {
 
   return (
     <div className={styles.container}>
+     <SEO 
+  title="ImgReducer | Resize, Compress & Convert Images Online FREE"
+  description="Free online image resizer, compressor, and converter. Reduce JPG, PNG, WEBP, HEIC images without losing quality."
+  url="https://img-reducer.com"
+/>
+
+<Helmet>
+  <script type="application/ld+json">
+    {JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "@id": "https://img-reducer.com/#webapp",
+
+      "name": "ImgReducer",
+      "url": "https://img-reducer.com",
+      "description": "Free online image resizer, compressor, and converter.",
+
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "All",
+
+      "creator": {
+        "@type": "Organization",
+        "name": "ImgReducer",
+        "url": "https://img-reducer.com"
+      },
+
+      "featureList": [
+        "Resize images online",
+        "Compress images without quality loss",
+        "Convert image formats",
+        "Supports JPG, JPEG, PNG, SVG, WEBP, HEIC, and AVIF",
+        "Fast and secure browser-based processing",
+        "Works on mobile, tablet, and desktop devices"
+      ],
+
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    })}
+  </script>
+</Helmet>
+
       <header>
         <div className={styles.header}>
           <img className={styles.logo} src="/favicon.png" alt="icon" />
@@ -770,6 +816,10 @@ const Home = () => {
           onMouseDown={handleMouseDown}
           onMouseUp={handleMouseUp}
           onMouseLeave={handleMouseUp}
+          role="button"
+          tabIndex={0}
+          aria-label="Upload images dropzone"
+          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleBrowse() }}
         >
           <input
             type="file"
@@ -821,7 +871,10 @@ const Home = () => {
       <footer>
         <div className={styles.footerContainer}>
         <span className={styles.footerText}>© 2026 ImgReducer. All rights reserved.</span>
-        <a href="mailto:imgreducer@gmailcom" className={styles.email}> Email Us</a>
+        <div>
+          <span className={styles.footerText}>imgreducer@gmail.com</span>
+        <a href="mailto:imgreducer@gmail.com" className={styles.email}> Email Us</a>
+        </div>
         </div>
       </footer>
 

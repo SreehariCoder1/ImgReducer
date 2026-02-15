@@ -114,6 +114,14 @@ width: 10em;
     .header {
         padding: 0.2em 4em 0.2em 4em;
     }
+
+    .footerContainer {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.4em;
+}
+
 }
 
 @media (max-width: 640px) {
@@ -209,4 +217,5 @@ width: 10em;
     padding: 0.1em 0.5em;
     border-radius: 0.6em;
     font-weight: 500;
+    margin-left: 0.5em;
 }
