@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Helmet } from "react-helmet-async";
+import HomeContent from "./HomeContent";
 import SEO from "./SEO";
 import styles from "../styles/Home.module.css";
 import heic2any from "heic2any";
@@ -999,6 +1000,7 @@ const Home = () => {
         </div>
       </main>
       <Features />
+      <HomeContent />
     </div>
   );
 };
