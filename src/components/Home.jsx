@@ -902,14 +902,6 @@ const Home = () => {
         </script>
       </Helmet>
 
-      <header>
-        <div className={styles.header}>
-          <img className={styles.logo} src="/favicon.png" alt="icon" />
-          <span className={styles.brand}>Img</span>
-          <span className={styles.brand_secondary}>Reducer</span>
-        </div>
-      </header>
-
       <main>
         <h1 className={styles.title}>Resize Your Images</h1>
 
