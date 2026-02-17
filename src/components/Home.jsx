@@ -999,21 +999,6 @@ const Home = () => {
         </div>
       </main>
       <Features />
-
-      <footer>
-        <div className={styles.footerContainer}>
-          <span className={styles.footerText}>
-            © 2026 ImgReducer. All rights reserved.
-          </span>
-          <div>
-            <span className={styles.footerText}>imgreducer@gmail.com</span>
-            <a href="mailto:imgreducer@gmail.com" className={styles.email}>
-              {" "}
-              Email Us
-            </a>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 };

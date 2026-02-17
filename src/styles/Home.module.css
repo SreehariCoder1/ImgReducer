@@ -154,12 +154,7 @@ width: 10em;
     width: 22rem !important;
   }
 }
-/* footer media queries */
-@media (max-width: 768px) {
-  .footerContainer {
-    font-size: 0.7rem;
-  }
-}
+
 .loadingOverlay {
     position: fixed;
     top: 50%;
@@ -197,25 +192,4 @@ width: 10em;
 @keyframes slideDown {
   from { top: -50px; opacity: 0; }
   to { top: 20px; opacity: 1; }
-}
-
-/* footer */
-.footerContainer {
-    display: flex;
-    justify-content: space-between;
-    padding: 1em;
-    background-color: black;
-}
-
-.footerText {
-    color: white;
-}
-
-.email {
-    background-color: white;
-    text-decoration: none;
-    padding: 0.1em 0.5em;
-    border-radius: 0.6em;
-    font-weight: 500;
-    margin-left: 0.5em;
 }

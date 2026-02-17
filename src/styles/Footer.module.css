@@ -1,0 +1,60 @@
+.content {
+  background-color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+    padding: 0.4em 0.8em;
+}
+
+.links {
+  display: flex;
+  gap: 1.3em;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.links a {
+  color: white;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.2s;
+}
+
+.links a:hover {
+  text-decoration: underline;
+}
+
+.copy {
+  color: white;
+}
+
+.copyContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.footerText {
+    color: white;
+}
+
+.email {
+    background-color: white;
+    text-decoration: none;
+    padding: 0.1em 0.5em;
+    border-radius: 0.6em;
+    font-weight: 500;
+    margin-left: 0.5em;
+}
+
+/* media queries */
+@media (max-width: 650px) {
+ .copyContainer {
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+}
