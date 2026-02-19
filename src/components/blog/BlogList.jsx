@@ -33,6 +33,14 @@ const BlogList = () => {
         title="Blog - ImgReducer"
         description="Latest articles and guides on image optimization, web performance, and SEO best practices."
         url="https://www.img-reducer.com/blog"
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "Blog",
+          headline: "ImgReducer Blog",
+          description:
+            "Latest articles and guides on image optimization, web performance, and SEO best practices.",
+          url: "https://www.img-reducer.com/blog",
+        }}
       />
       <div className={styles.container}>
         <h1 className={styles.title}>ImgReducer Blog</h1>

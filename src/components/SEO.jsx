@@ -7,7 +7,8 @@ export default function SEO({
   name = "ImgReducer",
   type = "website",
   url = "https://www.img-reducer.com",
-  image = "https://imgreducer.netlify.app/og-image.jpg",
+  image = "https://www.img-reducer.com/favicon.png",
+  schema,
 }) {
   useEffect(() => {
     // Manually update title and meta description to ensure 100% update on route change
@@ -66,6 +67,9 @@ export default function SEO({
         key="twitter:description"
       />
       <meta name="twitter:image" content={image} key="twitter:image" />
+      {schema && (
+        <script type="application/ld+json">{JSON.stringify(schema)}</script>
+      )}
     </Helmet>
   );
 }
