@@ -63,6 +63,725 @@
     <link rel="stylesheet" href="./src/styles/global.css" />
   </head>
   <body>
+    <div className={styles.articleContainer}>
+        <Link to="/blog" className={styles.backLink}>
+          &larr; Back to Blog
+        </Link>
+        <h1 className={styles.articleTitle}>
+          The Ultimate Guide to Image Optimization for SEO
+        </h1>
+        <div className={styles.meta}>
+          Published on February 17, 2026 • 5 min read
+        </div>
+
+        <div className={styles.content}>
+          <p>
+            In the competitive world of digital marketing, Search Engine
+            Optimization (SEO) is king. While most site owners focus on keywords
+            and backlinks, one crucial factor is often overlooked:{" "}
+            <strong>Image Optimization</strong>. Images are the heaviest assets
+            on most websites, and if left unoptimized, they can drag down your
+            page speed and kill your search rankings.
+          </p>
+          <p>
+            In this guide, we'll explore why image optimization matters and how
+            you can master it using tools like ImgReducer.
+          </p>
+
+          <h2>Why Image SEO Matters</h2>
+          <p>
+            Google and other search engines prioritize{" "}
+            <strong>User Experience (UX)</strong>. A slow-loading site
+            frustrates users, leading to high bounce rates. Since 2010, page
+            speed has been a ranking factor for desktop searches, and in 2018,
+            it became a ranking factor for mobile searches too.
+          </p>
+          <p>
+            Furthermore, with the introduction of{" "}
+            <strong>Core Web Vitals</strong>, specifically Largest Contentful
+            Paint (LCP), loading large images quickly is more important than
+            ever. If your hero image takes 3 seconds to load, your SEO score
+            suffers immediately.
+          </p>
+
+          <h2>Step 1: Choose the Right Format</h2>
+          <p>
+            Not all image formats are created equal. The three main formats for
+            the web are:
+          </p>
+          <ul>
+            <li>
+              <strong>JPEG:</strong> Best for photographs with many colors. It
+              offers good compression but is "lossy".
+            </li>
+            <li>
+              <strong>PNG:</strong> Best for images with transparency or sharp
+              edges (like logos). It is "lossless" but produces larger files.
+            </li>
+            <li>
+              <strong>WebP:</strong> The modern standard. It supports both
+              transparency and superior compression, often making files 26%
+              smaller than PNGs and 30% smaller than JPEGs without visible
+              quality loss.
+            </li>
+          </ul>
+          <p>
+            <strong>Pro Tip:</strong> Always convert your PNGs to WebP whenever
+            possible using ImgReducer.
+          </p>
+
+          <h2>Step 2: Compress Without Sacrificing Quality</h2>
+          <p>
+            Uploading raw images from your camera or massive stock photos is a
+            common mistake. These files can be 5MB or larger, whereas a web
+            image should rarely exceed 200KB.
+          </p>
+          <p>
+            Using a tool like ImgReducer allows you to strip away unnecessary
+            metadata and compress pixel data. We use intelligent lossy
+            compression that removes data the human eye can't see. The result? A
+            5MB photo becomes a 150KB web-ready asset that looks identical to
+            the original.
+          </p>
+
+          <h2>Step 3: Resize to Scale</h2>
+          <p>
+            If your website displays an image at 800x600 pixels, there is no
+            reason to upload a 4000x3000 pixel version. The browser still has to
+            download the massive file and then shrink it down, wasting bandwidth
+            and processing power.
+          </p>
+          <p>
+            Always resize your images to the maximum width they will be
+            displayed on your site. For most blog posts, a width of 1200px is
+            sufficient.
+          </p>
+
+          <h2>Step 4: Use Descriptive File Names and Alt Text</h2>
+          <p>
+            Google can't "see" images the way humans do. It relies on text to
+            understand context.
+          </p>
+          <ul>
+            <li>
+              <strong>Bad Filename:</strong> IMG_5432.jpg
+            </li>
+            <li>
+              <strong>Good Filename:</strong> red-running-shoes-nike.jpg
+            </li>
+          </ul>
+          <p>
+            Similarly, always fill out the <strong>Alt Text</strong> attribute.
+            This not only helps screen readers for visually impaired users (a
+            legal requirement in many places) but also tells Google exactly what
+            the image is about, helping you rank in Google Images search.
+          </p>
+
+          <h2>Conclusion</h2>
+          <p>
+            Image optimization is a low-hanging fruit with high returns. By
+            reducing file sizes, choosing modern formats like WebP, and ensuring
+            proper metadata, you can significantly improve your website's speed
+            and SEO rankings. Start optimizing your library today with
+            ImgReducer!
+          </p>
+        </div>
+      </div>
+       <div className={styles.articleContainer}>
+        <Link to="/blog" className={styles.backLink}>
+          &larr; Back to Blog
+        </Link>
+        <h1 className={styles.articleTitle}>
+          JPG vs PNG vs WebP: Which Format Should You Use?
+        </h1>
+        <div className={styles.meta}>
+          Published on February 16, 2026 • 6 min read
+        </div>
+
+        <div className={styles.content}>
+          <p>
+            One of the most common questions we get at ImgReducer is: "Which
+            format is best?" The answer, as with many things in tech, is "it
+            depends." Each image format was designed for a specific purpose, and
+            using the wrong one can lead to blurry images or bloated file sizes.
+          </p>
+          <p>
+            In this article, we'll break down the "Big Three" web formats—JPEG,
+            PNG, and WebP—to help you decide which one to use.
+          </p>
+
+          <h2>JPEG (Joint Photographic Experts Group)</h2>
+          <p>
+            <strong>Best for:</strong> Photographs, complex gradients, and
+            images with millions of colors.
+          </p>
+          <p>
+            JPEG is the grandfather of web images. It uses "lossy" compression,
+            meaning it sacrifices some image data to achieve smaller file sizes.
+            This creates a trade-off: higher compression leads to smaller files
+            but introduces "artifacts" (blocky noise).
+          </p>
+          <ul>
+            <li>
+              <strong>Pros:</strong> Widely supported, small file sizes for
+              photos.
+            </li>
+            <li>
+              <strong>Cons:</strong> No transparency support, quality degrades
+              with each save, bad for text/logos.
+            </li>
+          </ul>
+
+          <h2>PNG (Portable Network Graphics)</h2>
+          <p>
+            <strong>Best for:</strong> Logos, icons, screenshots, and images
+            requiring transparency.
+          </p>
+          <p>
+            PNG is a "lossless" format. When you compress a PNG, you lose zero
+            quality. This makes it perfect for sharp lines and text. However,
+            this precision comes at a cost: file sizes can be huge if used for
+            photographs.
+          </p>
+          <ul>
+            <li>
+              <strong>Pros:</strong> Supports transparency (alpha channels),
+              crisp text/lines, lossless quality.
+            </li>
+            <li>
+              <strong>Cons:</strong> Large file sizes for complex images.
+            </li>
+          </ul>
+
+          <h2>WebP (Web Picture Format)</h2>
+          <p>
+            <strong>Best for:</strong> Almost everything on the modern web.
+          </p>
+          <p>
+            Developed by Google, WebP is a modern format designed specifically
+            to replace both JPEG and PNG. It combines the best of both worlds:
+          </p>
+          <ul>
+            <li>
+              It supports <strong>lossy compression</strong> like JPEG (but with
+              better quality at same size).
+            </li>
+            <li>
+              It supports <strong>transparency</strong> like PNG (but often 3x
+              smaller).
+            </li>
+            <li>
+              It supports <strong>lossless compression</strong>.
+            </li>
+          </ul>
+          <p>
+            According to Google's data, WebP lossless images are 26% smaller
+            than PNGs, and WebP lossy images are 25-34% smaller than comparable
+            JPEG images.
+          </p>
+
+          <h2>So, Which Should You Choose?</h2>
+          <p>Here is our simple rule of thumb for 2026:</p>
+          <ol>
+            <li>
+              <strong>Default to WebP:</strong> For 90% of your website needs,
+              convert your images to WebP using ImgReducer. It offers the best
+              performance.
+            </li>
+            <li>
+              <strong>Use PNG for High-Detail Assets:</strong> If you have a
+              complex infographic or logo where every pixel must be perfect and
+              file size is less of a concern, stick with PNG.
+            </li>
+            <li>
+              <strong>Use JPEG as a Fallback:</strong> While WebP is supported
+              by all modern browsers (Chrome, Safari, Firefox, Edge), if you
+              need to support very old systems (like Internet Explorer), keep a
+              JPEG version handy.
+            </li>
+          </ol>
+
+          <h2>How to Convert?</h2>
+          <p>
+            You don't need expensive software like Photoshop to switch formats.
+            Simply drag your PNG or JPEG files into ImgReducer, select "WebP" as
+            the target format, and click Download. It's that easy to upgrade
+            your website's performance.
+          </p>
+        </div>
+      </div>
+       <div className={styles.articleContainer}>
+        <Link to="/blog" className={styles.backLink}>
+          &larr; Back to Blog
+        </Link>
+        <h1 className={styles.articleTitle}>
+          How to Improve Website Speed by Compressing Images
+        </h1>
+        <div className={styles.meta}>
+          Published on February 15, 2026 • 5 min read
+        </div>
+
+        <div className={styles.content}>
+          <p>
+            We live in an age of instant gratification. Studies show that{" "}
+            <strong>
+              53% of mobile users abandon a site if it takes longer than 3
+              seconds to load
+            </strong>
+            . That's more than half of your potential traffic gone in the blink
+            of an eye.
+          </p>
+          <p>
+            While there are many factors affecting site speed (server response
+            time, JavaScript execution), the single biggest contributor to "page
+            bloat" is unoptimized images.
+          </p>
+
+          <h2>The Bandwidth Bottleneck</h2>
+          <p>
+            According to the HTTP Archive, images make up roughly 50% of the
+            total page weight of an average website. If your homepage is 3MB,
+            and 2.5MB of that is images, you are forcing users to download a
+            small MP3 song's worth of data just to view your content. On a slow
+            4G or 3G connection, this can take 10+ seconds.
+          </p>
+
+          <h2>Impact on Core Web Vitals</h2>
+          <p>
+            Google measures User Experience using a set of metrics called Core
+            Web Vitals. The most visual of these is{" "}
+            <strong>LCP (Largest Contentful Paint)</strong>. This measures how
+            long it takes for the main content (usually a hero image or
+            headline) to become visible.
+          </p>
+          <p>If you upload a 2MB uncompressed banner image:</p>
+          <ol>
+            <li>The browser requests the image.</li>
+            <li>It downloads the massive file (slow).</li>
+            <li>It decodes and paints the image.</li>
+          </ol>
+          <p>
+            This entire process kills your LCP score. By compressing that image
+            to 150KB using ImgReducer, you reduce the download time by 90%,
+            directly improving your LCP score and your Google ranking.
+          </p>
+
+          <h2>How Compression Works</h2>
+          <p>Image compression isn't magic; it's math.</p>
+          <ul>
+            <li>
+              <strong>Chroma Subsampling:</strong> The human eye is more
+              sensitive to brightness than color. Compression algorithms group
+              color information for blocks of pixels (e.g., 4x4 squares) while
+              keeping brightness data distinct. This saves huge amounts of space
+              with little visual difference.
+            </li>
+            <li>
+              <strong>Removing Metadata:</strong> Your camera stores GPS
+              location, model info, and settings in the file header (EXIF data).
+              This text data adds weight but contributes nothing to the visual
+              image. ImgReducer strips this automatically.
+            </li>
+          </ul>
+
+          <h2>The Compounding Effect</h2>
+          <p>
+            Let's say you run an e-commerce store with 20 products on the
+            homepage.
+          </p>
+          <ul>
+            <li>
+              <strong>Before Optimization:</strong> 20 images x 500KB each =
+              10MB page load. (Unusable on mobile).
+            </li>
+            <li>
+              <strong>After Optimization:</strong> 20 images x 50KB WebP = 1MB
+              page load. (Lightning fast).
+            </li>
+          </ul>
+          <p>
+            This difference translates directly to revenue. Amazon found that
+            every 100ms of latency cost them 1% in sales. Optimizing images is
+            the highest ROI activity you can do for your website performance.
+          </p>
+
+          <h2>Summary</h2>
+          <p>
+            Don't let unoptimized images slow you down. Make image compression a
+            standard part of your content workflow. Before you upload any image
+            to your CMS, run it through ImgReducer. It takes seconds, costs
+            nothing, and saves you and your users precious time.
+          </p>
+        </div>
+      </div>
+      <div className={styles.contentContainer}>
+      {/* How to Use Section */}
+      <section className={styles.section}>
+        <h2>How to Use ImgReducer</h2>
+        <p>
+          Optimizing your images for the web has never been easier. ImgReducer
+          provides a seamless, client-side experience that respects your privacy
+          while delivering top-tier compression results. Follow this simple
+          guide to get started.
+        </p>
+
+        <div className={styles.guideStep}>
+          <h3>Step 1: Uploading your images</h3>
+          <p>
+            To begin, simply drag and drop/paste/click to upload your images
+            into the designated drop zone at the top of the page. ImgReducer
+            supports a wide variety of formats including JPG, PNG, SVG, WebP,
+            AVIF, and even HEIC files from iPhones. You can upload multiple
+            files at once for batch processing, making it perfect for
+            photographers and developers managing large assets.
+          </p>
+        </div>
+
+        <div className={styles.guideStep}>
+          <h3>Step 2: Choosing compression settings</h3>
+          <p>
+            Once your images are loaded, you have full control over the output.
+            You can choose to compress by
+            <strong> Target Filesize</strong> (e.g., "50KB") or by{" "}
+            <strong>Quality Percentage</strong>. If you need images for a
+            specific platform with strict size limits (like email attachments or
+            government portals), simply enter the desired size, and our
+            algorithm will iteratively adjust the quality to match it. You can
+            easily convert image formats, such as changing a heavy PNG into a
+            lightweight WebP, with just one click.
+          </p>
+        </div>
+
+        <div className={styles.guideStep}>
+          <h3>Step 3: Downloading</h3>
+          <p>Once you are satisfied with your compression settings:</p>
+          <ul>
+            <li>
+              Click the <strong>Download</strong> button on an image card. the
+              button will show "Processing..." while the image is being
+              processed.
+            </li>
+            <li>
+              Once processing is successful, the button text will change to
+              "Saved".
+            </li>
+            <li>
+              Your image(s) will be automatically downloaded to your system.
+            </li>
+            <li>Downloaded images will be in the selected size and format.</li>
+            <li>
+              You can click <strong>Download</strong> on multiple images, they
+              will be downloaded one by one in a queue.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className={styles.section}>
+        <h2>Frequently Asked Questions</h2>
+
+        <div className={styles.faqItem}>
+          <h3>Is it safe to use ImgReducer?</h3>
+          <p>
+            <strong>Yes, absolutely.</strong> Unlike other online tools that
+            upload your photos to a remote server for processing, ImgReducer
+            runs entirely in your browser using modern WebAssembly technology.
+            This means your images never leave your device. You can even
+            disconnect from the internet after loading the page, and the tool
+            will still work perfectly. Your privacy is our top priority.
+          </p>
+        </div>
+
+        <div className={styles.faqItem}>
+          <h3>What image formats are supported?</h3>
+          <p>
+            We support all modern image formats. You can upload{" "}
+            <strong>JPG/JPEG, PNG, WebP, AVIF, SVG, and HEIC</strong>. The tool
+            can convert between these formats as well. For example, you can
+            convert a batch of HEIC photos from your iPhone directly to JPEG or
+            WebP for better compatibility with websites and Windows devices.
+          </p>
+        </div>
+
+        <div className={styles.faqItem}>
+          <h3>Does compression reduce image quality?</h3>
+          <p>
+            It depends on the method you choose.{" "}
+            <strong>Lossless compression</strong> reduces file size without
+            removing any image data, keeping the quality 100% identical to the
+            original. <strong>Lossy compression</strong>
+            (which we use for high reduction) intelligently removes data that
+            the human eye cannot easily perceive. Our advanced algorithms ensure
+            that even with significant size reduction, your images look crisp
+            and professional to the naked eye.
+          </p>
+        </div>
+
+        <div className={styles.faqItem}>
+          <h3>Is this tool free?</h3>
+          <p>
+            Yes, ImgReducer is 100% free to use for both personal and commercial
+            projects. There are no hidden fees, watermarks, or daily limits. We
+            rely on ads to keep the website running and the tool free for
+            everyone.
+          </p>
+        </div>
+      </section>
+
+      {/* Educational Content Section */}
+      <section className={styles.section}>
+        <h2>Learn About Image Optimization</h2>
+
+        <article className={styles.article}>
+          <h3>Why use WebP instead of PNG or JPEG?</h3>
+          <p>
+            WebP is a modern image format developed by Google that provides
+            superior lossless and lossy compression for images on the web. On
+            average, WebP images are <strong>26% smaller than PNGs</strong> and
+            <strong> 25-34% smaller than comparable JPEGs</strong> at equivalent
+            SSIM quality index.
+          </p>
+          <p>
+            Using WebP makes your website load faster, which is a crucial factor
+            for SEO (Search Engine Optimization) and user experience. Faster
+            sites rank higher in Google search results and have lower bounce
+            rates. ImgReducer makes it incredibly easy to modernize your website
+            by converting your old library of JPEGs and PNGs into highly
+            efficient WebP files.
+          </p>
+        </article>
+
+        <article className={styles.article}>
+          <h3>The difference between Lossy and Lossless compression</h3>
+          <p>
+            Understanding the difference between these two compression types is
+            key to getting the best results.
+          </p>
+          <p>
+            <strong>Lossless compression</strong> allows the original data to be
+            perfectly reconstructed from the compressed data. No pixel
+            information is lost. This is ideal for archiving images, medical
+            imaging, or technical drawings where precision is paramount.
+            However, the file size reduction is usually moderate.
+          </p>
+          <p>
+            <strong>Lossy compression</strong> significantly reduces file size
+            by permanently eliminating certain information, especially redundant
+            data. This is used for standard JPEG and WebP compression. By
+            adjusting the "quality" slider, you decide how much data to discard.
+            For the web, lossy compression is preferred because it can reduce
+            file sizes by up to 90% with very little noticeable difference to
+            the user, drastically speeding up page loads.
+          </p>
+        </article>
+      </section>
+    </div>
+      <div className={styles.container}>
+        <div className={styles.content}>
+          <h1>About Us</h1>
+
+          <section>
+            <h2>Our Mission</h2>
+            <p>
+              At ImgReducer, we believe that a faster web is a better web. Large
+              images are one of the biggest reasons for slow-loading websites.
+              Our mission is to make high-quality image compression accessible,
+              free, and secure for everyone—from developers and designers to
+              everyday users.
+            </p>
+          </section>
+
+          <section>
+            <h2>Why ImgReducer?</h2>
+            <p>
+              Most online image converters require you to upload your files to a
+              remote server. This is slow, uses bandwidth, and raises privacy
+              concerns.
+            </p>
+            <p>
+              <strong>ImgReducer is different.</strong> We built this tool using
+              advanced WebAssembly and browser technologies to perform all image
+              compression
+              <em> directly on your device</em>. Your photos never leave your
+              computer or phone.
+            </p>
+            <ul>
+              <li>
+                <strong>Speed:</strong> No upload or download time. Processing
+                is instant.
+              </li>
+              <li>
+                <strong>Privacy:</strong> Your files stay with you.
+              </li>
+              <li>
+                <strong>Quality:</strong> We use state-of-the-art compression
+                algorithms (MozJPEG, PNGQuant, etc.) ported to the browser.
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>The Team</h2>
+            <p>
+              ImgReducer is a passion project maintained by web performance
+              enthusiasts. We are constantly improving our algorithms to support
+              the latest formats like AVIF and WebP.
+            </p>
+          </section>
+        </div>
+      </div>
+       <div className={styles.container}>
+        <div className={styles.content}>
+          <h1>Privacy Policy</h1>
+          <p className={styles.lastUpdated}>
+            Last updated: 16/02/2026
+          </p>
+
+          <section>
+            <h2>1. Introduction</h2>
+            <p>
+              Welcome to ImgReducer. We respect your privacy and are committed
+              to protecting your personal data. This privacy policy explains how
+              we handle your information when you use our website.
+            </p>
+          </section>
+
+          <section>
+            <h2>2. Data Collection & Processing</h2>
+            <p>
+              <strong>ImgReducer operates entirely client-side.</strong> This
+              means:
+            </p>
+            <ul>
+              <li>Your images are processed locally within your browser.</li>
+              <li>
+                We do <strong>not</strong> upload your images to any server.
+              </li>
+              <li>
+                We do <strong>not</strong> store or view your images.
+              </li>
+            </ul>
+            <p>
+              Once you close the tab or refresh the page, any data related to
+              your session is cleared from your browser's memory.
+            </p>
+          </section>
+
+          <section>
+            <h2>3. Cookies and Tracking</h2>
+            <p>
+              While our tool does not track you, we use third-party services
+              that may use cookies:
+            </p>
+            <ul>
+              <li>
+                <strong>Google Analytics:</strong> We use Google Analytics to
+                understand how visitors interact with our website to improve
+                user experience. Google Analytics collects anonymous data such
+                as page views, session duration, and device type.
+              </li>
+              <li>
+                <strong>Google AdSense:</strong> We display ads provided by
+                Google AdSense. Google uses cookies to serve ads based on your
+                prior visits to our website or other websites. Google's use of
+                advertising cookies enables it and its partners to serve ads to
+                you based on your visit to our site and/or other sites on the
+                Internet.
+              </li>
+            </ul>
+            <p>
+              You can opt out of personalized advertising by visiting{" "}
+              <a
+                href="https://www.google.com/settings/ads"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Google Ads Settings
+              </a>
+              .
+            </p>
+          </section>
+
+          <section>
+            <h2>4. Changes to This Policy</h2>
+            <p>
+              We may update our Privacy Policy from time to time. We will notify
+              you of any changes by posting the new Privacy Policy on this page.
+            </p>
+          </section>
+
+          <section>
+            <h2>5. Contact Us</h2>
+            <p>
+              If you have any questions about this Privacy Policy, please
+              contact us.
+            </p>
+          </section>
+        </div>
+      </div>
+       <div className={styles.container}>
+        <div className={styles.content}>
+          <h1>Terms of Service</h1>
+          <p className={styles.lastUpdated}>
+            Last updated: {new Date().toLocaleDateString()}
+          </p>
+
+          <section>
+            <h2>1. Acceptance of Terms</h2>
+            <p>
+              By accessing and using ImgReducer, you accept and agree to be
+              bound by the terms and provision of this agreement.
+            </p>
+          </section>
+
+          <section>
+            <h2>2. Use License</h2>
+            <p>
+              ImgReducer is a free tool provided for personal and commercial
+              use. You are free to use the output images for any purpose using
+              our tool.
+            </p>
+          </section>
+
+          <section>
+            <h2>3. Disclaimer</h2>
+            <p>
+              The materials on ImgReducer's website are provided on an 'as is'
+              basis. ImgReducer makes no warranties, expressed or implied, and
+              hereby disclaims and negates all other warranties including,
+              without limitation, implied warranties or conditions of
+              merchantability, fitness for a particular purpose, or
+              non-infringement of intellectual property or other violation of
+              rights.
+            </p>
+            <p>
+              Further, since all processing happens locally on your device, we
+              are not responsible for any data loss, browser crashes, or
+              performance issues that may occur during the use of this tool.
+            </p>
+          </section>
+
+          <section>
+            <h2>4. Limitations</h2>
+            <p>
+              In no event shall ImgReducer or its suppliers be liable for any
+              damages (including, without limitation, damages for loss of data
+              or profit, or due to business interruption) arising out of the use
+              or inability to use the materials on ImgReducer's website.
+            </p>
+          </section>
+
+          <section>
+            <h2>5. Governing Law</h2>
+            <p>
+              Any claim relating to ImgReducer's website shall be governed by
+              the laws of your jurisdiction without regard to its conflict of
+              law provisions.
+            </p>
+          </section>
+        </div>
+      </div>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
