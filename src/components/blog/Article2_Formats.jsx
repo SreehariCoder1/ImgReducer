@@ -1,48 +1,12 @@
-import { Link } from "react-router-dom";
-import SEO from "../SEO";
+import Link from "next/link";
 import styles from "./Blog.module.css";
 
 const Article2_Formats = () => {
   return (
     <>
-      <SEO
-        title="JPG vs PNG vs WebP: Which Format Should You Use?"
-        description="A comprehensive comparison of image formats. Discover when to use JPEG, PNG, or WebP for the best balance of quality and performance."
-        url="https://www.img-reducer.com/blog/jpg-vs-png-vs-webp"
-        schema={{
-          "@context": "https://schema.org",
-          "@type": "BlogPosting",
-          mainEntityOfPage: {
-            "@type": "WebPage",
-            "@id": "https://www.img-reducer.com/blog/jpg-vs-png-vs-webp",
-            url: "https://www.img-reducer.com/blog/jpg-vs-png-vs-webp",
-          },
-          headline: "JPG vs PNG vs WebP: Which Format Should You Use?",
-          description:
-            "A comprehensive comparison of image formats. Discover when to use JPEG, PNG, or WebP for the best balance of quality and performance.",
-          image:
-            "https://www.img-reducer.com/images/blog/jpg-vs-png-vs-webp.webp",
-          author: {
-            "@type": "Organization",
-            "@id": "https://www.img-reducer.com/#organization",
-            name: "ImgReducer",
-            url: "https://www.img-reducer.com",
-          },
-          publisher: {
-            "@type": "Organization",
-            name: "ImgReducer",
-            logo: {
-              "@type": "ImageObject",
-              url: "https://www.img-reducer.com/favicon.png",
-            },
-          },
-          datePublished: "2026-02-16T09:00:00+05:30",
-          dateModified: "2026-02-16T09:00:00+05:30",
-          url: "https://www.img-reducer.com/blog/jpg-vs-png-vs-webp",
-        }}
-      />
+      
       <div className={styles.articleContainer}>
-        <Link to="/blog" className={styles.backLink}>
+        <Link href="/blog" className={styles.backLink}>
           &larr; Back to Blog
         </Link>
         <h1 className={styles.articleTitle}>

@@ -1,12 +1,10 @@
+"use client";
 import { useState, useEffect, useRef, useCallback } from "react";
-import { Helmet } from "react-helmet-async";
 import HomeContent from "./HomeContent";
-import SEO from "./SEO";
 import styles from "../styles/Home.module.css";
-import heic2any from "heic2any";
 import { ImageCard } from "./ImageCard";
 import Features from "./Features";
-import ImageWorker from "../workers/image.worker?worker";
+// Worker is instantiated dynamically below
 import {
   saveImageToDB,
   getImagesFromDB,
@@ -281,6 +279,7 @@ const Home = () => {
             file.name.toLowerCase().endsWith(".heic") ||
             file.type === "image/heic"
           ) {
+            const heic2any = (await import("heic2any")).default;
             const blob = await heic2any({ blob: file, toType: "image/jpeg" });
             file = new File([blob], file.name.replace(/\.heic$/i, ".jpg"), {
               type: "image/jpeg",
@@ -619,7 +618,7 @@ const Home = () => {
     if (window.OffscreenCanvas) {
       try {
         const workerBlob = await new Promise(async (resolve, reject) => {
-          const worker = new ImageWorker();
+          const worker = new Worker(new URL("../workers/image.worker.js", import.meta.url));
 
           // Handle Worker Response
           worker.onmessage = (e) => {
@@ -857,39 +856,7 @@ const Home = () => {
 
   return (
     <div className={styles.container}>
-      <SEO
-        title="ImgReducer | Resize, Compress & Convert Images Online FREE"
-        description="Free online image resizer, compressor, and converter. Reduce JPG/JPEG, PNG, SVG, WEBP, HEIC, and AVIF image size instantly without losing quality."
-        url="https://www.img-reducer.com"
-        schema={{
-          "@context": "https://schema.org",
-          "@type": "WebApplication",
-          "@id": "https://www.img-reducer.com/#webapp",
-          name: "ImgReducer",
-          url: "https://www.img-reducer.com",
-          description: "Free online image resizer, compressor, and converter.",
-          applicationCategory: "MultimediaApplication",
-          operatingSystem: "All",
-          creator: {
-            "@type": "Organization",
-            name: "ImgReducer",
-            url: "https://www.img-reducer.com",
-          },
-          featureList: [
-            "Resize images online",
-            "Compress images without quality loss",
-            "Convert image formats",
-            "Supports JPG, JPEG, PNG, SVG, WEBP, HEIC, and AVIF",
-            "Fast and secure browser-based processing",
-            "Works on mobile, tablet, and desktop devices",
-          ],
-          offers: {
-            "@type": "Offer",
-            price: "0",
-            priceCurrency: "USD",
-          },
-        }}
-      />
+      
 
       <main>
         <h1 className={styles.title}>Resize Your Images</h1>

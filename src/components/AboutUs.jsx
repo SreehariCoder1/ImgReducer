@@ -1,29 +1,9 @@
-import SEO from "./SEO";
 import styles from "../styles/Legal.module.css";
 
 const AboutUs = () => {
   return (
     <>
-      <SEO
-        title="About Us - ImgReducer"
-        description="About ImgReducer. Our mission is to provide fast, secure, and private image optimization for everyone."
-        url="https://www.img-reducer.com/about-us"
-        schema={{
-          "@context": "https://schema.org",
-          "@type": "AboutPage",
-          url: "https://www.img-reducer.com/about-us",
-          mainEntity: {
-            "@type": "Organization",
-            "@id": "https://www.img-reducer.com/#organization",
-            name: "ImgReducer",
-            url: "https://www.img-reducer.com",
-            logo: "https://www.img-reducer.com/favicon.png",
-            description:
-              "Fast, secure, and private image optimization for everyone.",
-            sameAs: ["https://github.com/SreehariCoder1/ImgReducer"],
-          },
-        }}
-      />
+      
       <div className={styles.container}>
         <div className={styles.content}>
           <h1>About Us</h1>

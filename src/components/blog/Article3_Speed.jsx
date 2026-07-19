@@ -1,49 +1,12 @@
-import { Link } from "react-router-dom";
-import SEO from "../SEO";
+import Link from "next/link";
 import styles from "./Blog.module.css";
 
 const Article3_Speed = () => {
   return (
     <>
-      <SEO
-        title="How to Improve Website Speed by Compressing Images"
-        description="Speed kills... bounce rates. Discover how compressing images can make your website lightning fast and improve conversion rates."
-        url="https://www.img-reducer.com/blog/website-speed-optimization"
-        schema={{
-          "@context": "https://schema.org",
-          "@type": "BlogPosting",
-          mainEntityOfPage: {
-            "@type": "WebPage",
-            "@id":
-              "https://www.img-reducer.com/blog/website-speed-optimization",
-            url: "https://www.img-reducer.com/blog/website-speed-optimization",
-          },
-          headline: "How to Improve Website Speed by Compressing Images",
-          description:
-            "Speed kills... bounce rates. Discover how compressing images can make your website lightning fast and improve conversion rates.",
-          image:
-            "https://www.img-reducer.com/images/blog/improve-website-speed-compressing-images.webp",
-          author: {
-            "@type": "Organization",
-            "@id": "https://www.img-reducer.com/#organization",
-            name: "ImgReducer",
-            url: "https://www.img-reducer.com",
-          },
-          publisher: {
-            "@type": "Organization",
-            name: "ImgReducer",
-            logo: {
-              "@type": "ImageObject",
-              url: "https://www.img-reducer.com/favicon.png",
-            },
-          },
-          datePublished: "2026-02-15T09:00:00+05:30",
-          dateModified: "2026-02-15T09:00:00+05:30",
-          url: "https://www.img-reducer.com/blog/website-speed-optimization",
-        }}
-      />
+      
       <div className={styles.articleContainer}>
-        <Link to="/blog" className={styles.backLink}>
+        <Link href="/blog" className={styles.backLink}>
           &larr; Back to Blog
         </Link>
         <h1 className={styles.articleTitle}>

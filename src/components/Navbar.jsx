@@ -1,5 +1,6 @@
+"use client";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import styles from "../styles/Navbar.module.css";
 
 const Navbar = () => {
@@ -8,25 +9,25 @@ const Navbar = () => {
   return (
     <nav className={styles.navbar}>
       <div className={styles.container}>
-        <Link to="/" className={styles.logo}>
+        <Link href="/" className={styles.logo}>
           <img src="/favicon.png" alt="logo" className={styles.logoIcon} />
           ImgReducer
         </Link>
 
         <div className={`${styles.links} ${isOpen ? styles.active : ""}`}>
-          <Link to="/" onClick={() => setIsOpen(false)}>
+          <Link href="/" onClick={() => setIsOpen(false)}>
             Home
           </Link>
-          <Link to="/about-us" onClick={() => setIsOpen(false)}>
+          <Link href="/about-us" onClick={() => setIsOpen(false)}>
             About Us
           </Link>
-          <Link to="/blog" onClick={() => setIsOpen(false)}>
+          <Link href="/blog" onClick={() => setIsOpen(false)}>
             Blog
           </Link>
-          <Link to="/privacy-policy" onClick={() => setIsOpen(false)}>
+          <Link href="/privacy-policy" onClick={() => setIsOpen(false)}>
             Privacy
           </Link>
-          <Link to="/terms-of-service" onClick={() => setIsOpen(false)}>
+          <Link href="/terms-of-service" onClick={() => setIsOpen(false)}>
             Terms
           </Link>
         </div>

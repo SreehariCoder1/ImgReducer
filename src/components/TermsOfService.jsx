@@ -1,14 +1,9 @@
-import SEO from "./SEO";
 import styles from "../styles/Legal.module.css";
 
 const TermsOfService = () => {
   return (
     <>
-      <SEO
-        title="Terms of Service - ImgReducer"
-        description="Terms of Service for ImgReducer. Read our conditions of use."
-        url="https://www.img-reducer.com/terms-of-service"
-      />
+      
       <div className={styles.container}>
         <div className={styles.content}>
           <h1>Terms of Service</h1>

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import styles from "../styles/Footer.module.css";
 
 const Footer = () => {
@@ -18,11 +18,11 @@ const Footer = () => {
           </div>
         </div>
         <div className={styles.links}>
-          <Link to="/">Home</Link>
-          <Link to="/about-us">About Us</Link>
-          <Link to="/blog">Blog</Link>
-          <Link to="/privacy-policy">Privacy Policy</Link>
-          <Link to="/terms-of-service">Terms of Service</Link>
+          <Link href="/">Home</Link>
+          <Link href="/about-us">About Us</Link>
+          <Link href="/blog">Blog</Link>
+          <Link href="/privacy-policy">Privacy Policy</Link>
+          <Link href="/terms-of-service">Terms of Service</Link>
         </div>
       </div>
     </footer>

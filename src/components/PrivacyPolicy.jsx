@@ -1,14 +1,9 @@
-import SEO from "./SEO";
 import styles from "../styles/Legal.module.css";
 
 const PrivacyPolicy = () => {
   return (
     <>
-      <SEO
-        title="Privacy Policy - ImgReducer"
-        description="Privacy Policy for ImgReducer. Learn how we handle your data with 100% client-side processing."
-        url="https://www.img-reducer.com/privacy-policy"
-      />
+      
       <div className={styles.container}>
         <div className={styles.content}>
           <h1>Privacy Policy</h1>

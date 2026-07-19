@@ -1,48 +1,12 @@
-import { Link } from "react-router-dom";
-import SEO from "../SEO";
+import Link from "next/link";
 import styles from "./Blog.module.css";
 
 const Article1_SEO = () => {
   return (
     <>
-      <SEO
-        title="The Ultimate Guide to Image Optimization for SEO"
-        description="Learn how to optimize images for search engines. Improve site speed, rank higher, and drive traffic with these proven strategies."
-        url="https://www.img-reducer.com/blog/image-optimization-seo"
-        schema={{
-          "@context": "https://schema.org",
-          "@type": "BlogPosting",
-          mainEntityOfPage: {
-            "@type": "WebPage",
-            "@id": "https://www.img-reducer.com/blog/image-optimization-seo",
-            url: "https://www.img-reducer.com/blog/image-optimization-seo",
-          },
-          headline: "The Ultimate Guide to Image Optimization for SEO",
-          description:
-            "Learn how to optimize images for search engines. Improve site speed, rank higher, and drive traffic with these proven strategies.",
-          image:
-            "https://www.img-reducer.com/images/blog/image-optimization-for-seo.webp",
-          author: {
-            "@type": "Organization",
-            "@id": "https://www.img-reducer.com/#organization",
-            name: "ImgReducer",
-            url: "https://www.img-reducer.com",
-          },
-          publisher: {
-            "@type": "Organization",
-            name: "ImgReducer",
-            logo: {
-              "@type": "ImageObject",
-              url: "https://www.img-reducer.com/favicon.png",
-            },
-          },
-          datePublished: "2026-02-17T09:00:00+05:30",
-          dateModified: "2026-02-17T09:00:00+05:30",
-          url: "https://www.img-reducer.com/blog/image-optimization-seo",
-        }}
-      />
+      
       <div className={styles.articleContainer}>
-        <Link to="/blog" className={styles.backLink}>
+        <Link href="/blog" className={styles.backLink}>
           &larr; Back to Blog
         </Link>
         <h1 className={styles.articleTitle}>

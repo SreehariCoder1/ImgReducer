@@ -1,5 +1,4 @@
-import { Link } from "react-router-dom";
-import SEO from "../SEO";
+import Link from "next/link";
 import styles from "./Blog.module.css";
 
 const BlogList = () => {
@@ -28,21 +27,7 @@ const BlogList = () => {
   ];
 
   return (
-    <>
-      <SEO
-        title="Blog - ImgReducer"
-        description="Latest articles and guides on image optimization, web performance, and SEO best practices."
-        url="https://www.img-reducer.com/blog"
-        schema={{
-          "@context": "https://schema.org",
-          "@type": "Blog",
-          headline: "ImgReducer Blog",
-          description:
-            "Latest articles and guides on image optimization, web performance, and SEO best practices.",
-          url: "https://www.img-reducer.com/blog",
-        }}
-      />
-      <div className={styles.container}>
+    <div className={styles.container}>
         <h1 className={styles.title}>ImgReducer Blog</h1>
         <p className={styles.intro}>
           Expert tips, guides, and insights to help you master image
@@ -53,7 +38,7 @@ const BlogList = () => {
           {articles.map((article) => (
             <Link
               key={article.id}
-              to={`/blog/${article.id}`}
+              href={`/blog/${article.id}`}
               className={styles.card}
             >
               <h2>{article.title}</h2>
@@ -63,7 +48,6 @@ const BlogList = () => {
           ))}
         </div>
       </div>
-    </>
   );
 };
 
