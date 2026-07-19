@@ -68,7 +68,7 @@ const Features = () => {
             <div className={styles.iconWrapper}>
                 {feature.icon}
             </div>
-            <h3 className={styles.title}>{feature.title}</h3>
+            <h2 className={styles.title}>{feature.title}</h2>
             <p className={styles.description}>{feature.description}</p>
           </div>
         ))}

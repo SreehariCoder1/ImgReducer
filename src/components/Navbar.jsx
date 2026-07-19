@@ -35,6 +35,7 @@ const Navbar = () => {
         <button
           className={styles.menuButton}
           onClick={() => setIsOpen(!isOpen)}
+          aria-label="Toggle navigation menu"
         >
           <span className={styles.bar}></span>
           <span className={styles.bar}></span>
