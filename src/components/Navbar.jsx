@@ -10,7 +10,7 @@ const Navbar = () => {
     <nav className={styles.navbar}>
       <div className={styles.container}>
         <Link href="/" className={styles.logo}>
-          <img src="/favicon.png" alt="logo" className={styles.logoIcon} />
+          <img src="/logo.png" alt="logo" className={styles.logoIcon} />
           ImgReducer
         </Link>
 

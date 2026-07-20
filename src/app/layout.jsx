@@ -69,11 +69,11 @@ export default function RootLayout({ children }) {
           }}
         />
 
-        <Script
+        <script
+          async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7428192121125610"
           crossOrigin="anonymous"
-          strategy="afterInteractive"
-        />
+        ></script>
       </head>
       <body>
         <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
