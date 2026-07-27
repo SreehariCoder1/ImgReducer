@@ -44,11 +44,36 @@ export default function Article1Page() {
     url: "https://www.img-reducer.com/blog/image-optimization-seo",
   };
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.img-reducer.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Blog",
+        "item": "https://www.img-reducer.com/blog"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "The Ultimate Guide to Image Optimization for SEO",
+        "item": "https://www.img-reducer.com/blog/image-optimization-seo"
+      }
+    ]
+  };
+
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([schema, breadcrumbSchema]) }}
       />
       <Article1_SEO />
     </>
