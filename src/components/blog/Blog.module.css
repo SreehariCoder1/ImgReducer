@@ -127,6 +127,27 @@
   color: var(--primary-color);
 }
 
+.ctaBox {
+    border-radius: .75rem;
+    margin-top: 2rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px -1px #0000001a;
+}
+
+.ctaBox p {
+  margin: 0 !important;
+}
+
+.ctaBox a {
+  color: var(--primary-color);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.ctaBox a:hover {
+  text-decoration: none;
+}
+
 /* media queries */
 @media (max-width: 768px) {
   .title {

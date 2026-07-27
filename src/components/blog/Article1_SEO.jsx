@@ -127,6 +127,11 @@ const Article1_SEO = () => {
             and SEO rankings. Start optimizing your library today with
             ImgReducer!
           </p>
+          <div className={styles.ctaBox}>
+            <p>
+              <strong>Ready to improve your SEO?</strong> <Link href="/">Try our free online image compressor</Link> to significantly reduce file sizes without losing quality.
+            </p>
+          </div>
         </div>
       </div>
     </>

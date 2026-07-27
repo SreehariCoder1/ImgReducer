@@ -126,6 +126,11 @@ const Article2_Formats = () => {
             the target format, and click Download. It's that easy to upgrade
             your website's performance.
           </p>
+          <div className={styles.ctaBox}>
+            <p>
+              <strong>Ready to modernize your images?</strong> <Link href="/">Try our free online image converter</Link> to instantly switch to WebP or PNG.
+            </p>
+          </div>
         </div>
       </div>
     </>

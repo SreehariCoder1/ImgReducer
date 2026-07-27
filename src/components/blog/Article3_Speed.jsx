@@ -107,6 +107,11 @@ const Article3_Speed = () => {
             to your CMS, run it through ImgReducer. It takes seconds, costs
             nothing, and saves you and your users precious time.
           </p>
+          <div className={styles.ctaBox}>
+            <p>
+              <strong>Ready to speed up your site?</strong> <Link href="/">Try our free online image compressor</Link> to significantly reduce your image file sizes.
+            </p>
+          </div>
         </div>
       </div>
     </>
