@@ -1,30 +1,9 @@
 import Link from "next/link";
 import styles from "./Blog.module.css";
+import { blogData } from "../../utils/blogData";
 
 const BlogList = () => {
-  const articles = [
-    {
-      id: "image-optimization-seo",
-      title: "The Ultimate Guide to Image Optimization for SEO",
-      excerpt:
-        "Learn why optimized images are crucial for your site ranking and how to implement best practices for faster load times and better user experience.",
-      date: "February 17, 2026",
-    },
-    {
-      id: "jpg-vs-png-vs-webp",
-      title: "JPG vs PNG vs WebP: Which Format Should You Use?",
-      excerpt:
-        "Struggling to choose the right image format? We break down the differences, pros, and cons of each to help you make the best decision for your website.",
-      date: "February 16, 2026",
-    },
-    {
-      id: "website-speed-optimization",
-      title: "How to Improve Website Speed by Compressing Images",
-      excerpt:
-        "Slow websites kill conversions. Discover how proper image compression can dramatically improve your Core Web Vitals and keep visitors engaged.",
-      date: "February 15, 2026",
-    },
-  ];
+  const articles = blogData;
 
   return (
     <div className={styles.container}>
