@@ -33,7 +33,9 @@
 }
 
 .dropZone_Image {
-width: 10em;
+  width: 10em;
+  height: 10em;
+  aspect-ratio: 1 / 1;
 }
 
 .dropZoneText {

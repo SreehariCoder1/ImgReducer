@@ -913,6 +913,8 @@ const Home = () => {
                 <img
                   src="/drop-zone_image.png"
                   alt="drop-zone"
+                  width="160"
+                  height="160"
                   className={styles.dropZone_Image}
                 />
                 <p className={styles.dropZoneText}>Load Images</p>
