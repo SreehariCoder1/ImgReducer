@@ -915,6 +915,7 @@ const Home = () => {
                   alt="drop-zone"
                   width="160"
                   height="160"
+                  fetchPriority="high"
                   className={styles.dropZone_Image}
                 />
                 <p className={styles.dropZoneText}>Load Images</p>
