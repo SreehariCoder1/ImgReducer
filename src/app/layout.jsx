@@ -30,7 +30,7 @@ export default function RootLayout({ children }) {
         {/* Microsoft Clarity */}
         <Script
           id="clarity-script"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `
               (function (c, l, a, r, i, t, y) {
@@ -51,12 +51,12 @@ export default function RootLayout({ children }) {
 
         {/* Google Analytics (gtag.js) */}
         <Script
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           src="https://www.googletagmanager.com/gtag/js?id=G-23TKFZLRC8"
         />
         <Script
           id="google-analytics"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
