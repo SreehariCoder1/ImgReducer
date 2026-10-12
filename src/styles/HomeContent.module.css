@@ -14,6 +14,60 @@
   text-align: center;
 }
 
+.toolsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.toolCard {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  text-decoration: none;
+  color: inherit;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.toolCard:hover {
+  transform: translateY(-0.2em);
+  border-color: #2563eb;
+  box-shadow: 0 0.625em 0.9375em -0.1875em rgba(37, 99, 235, 0.12);
+}
+
+.toolCardBadge {
+  display: inline-block;
+  background: #eff6ff;
+  color: #2563eb;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.25rem 0.6rem;
+  border-radius: 9999px;
+  margin-bottom: 0.75rem;
+  width: fit-content;
+}
+
+.toolCardTitle {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.toolCardDesc {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
 .guideStep,
 .faqItem,
 .article {
@@ -49,8 +103,6 @@
   color: var(--text-secondary);
   line-height: 1.7;
   font-size: 1.05rem;
-  line-height: 1.7;
-  font-size: 1.05rem;
   margin-bottom: 1rem;
 }
 
@@ -80,6 +132,10 @@
 @media (max-width: 768px) {
   .section h2 {
     font-size: 2rem;
+  }
+
+  .toolsGrid {
+    grid-template-columns: 1fr;
   }
 
   .guideStep,

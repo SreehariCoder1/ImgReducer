@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect, useRef, useCallback } from "react";
 import HomeContent from "./HomeContent";
+import ToolContent from "./ToolContent";
 import styles from "../styles/Home.module.css";
 import { ImageCard } from "./ImageCard";
 import Features from "./Features";
@@ -12,7 +13,7 @@ import {
   updateImageInDB,
 } from "../utils/db";
 
-const Home = () => {
+const Home = ({ toolData = null }) => {
   const [images, setImages] = useState([]);
   const [isDragging, setIsDragging] = useState(false);
   const [isActive, setIsActive] = useState(false);
@@ -305,6 +306,15 @@ const Home = () => {
           const safeId =
             Date.now().toString(36) + Math.random().toString(36).substr(2);
 
+          const defaultTargetFormat =
+            toolData?.defaultSettings?.targetFormat || defaultFormat;
+          const defaultTargetSize =
+            toolData?.defaultSettings?.targetSize ?? 100;
+          const defaultTargetUnit =
+            toolData?.defaultSettings?.targetUnit || "KB";
+          const defaultResizeMode =
+            toolData?.defaultSettings?.resizeMode || "size";
+
           const newImgObj = {
             file,
             url: details.url, // Transient URL, will be regenerated on reload
@@ -314,10 +324,10 @@ const Home = () => {
             size: file.size,
             type: file.type,
             id: safeId,
-            targetSize: 100,
-            targetUnit: "KB",
-            targetFormat: defaultFormat,
-            resizeMode: "size",
+            targetSize: defaultTargetSize,
+            targetUnit: defaultTargetUnit,
+            targetFormat: defaultTargetFormat,
+            resizeMode: defaultResizeMode,
             targetQuality: "0.9",
             createdAt: Date.now(), // Timestamp for auto-deletion
           };
@@ -859,7 +869,22 @@ const Home = () => {
       
 
       <main>
-        <h1 className={styles.title}>Resize Your Images</h1>
+        <h1 className={styles.title}>
+          {toolData ? toolData.h1 : "Resize Your Images"}
+        </h1>
+        {toolData?.subtitle && (
+          <p
+            style={{
+              textAlign: "center",
+              color: "#475569",
+              margin: "-0.5rem 1rem 1.5rem 1rem",
+              fontSize: "1.05rem",
+              lineHeight: "1.5",
+            }}
+          >
+            {toolData.subtitle}
+          </p>
+        )}
 
         <div className={styles.info}>
           <span>Supported formats: JPG/JPEG, PNG, SVG, WebP, HEIC, AVIF</span>
@@ -951,7 +976,7 @@ const Home = () => {
         </div>
       </main>
       <Features />
-      <HomeContent />
+      {toolData ? <ToolContent toolData={toolData} /> : <HomeContent />}
     </div>
   );
 };

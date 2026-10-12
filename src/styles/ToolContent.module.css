@@ -1,0 +1,235 @@
+.container {
+  max-width: 62.5rem;
+  margin: 3rem auto 2rem auto;
+  padding: 0 1.5rem;
+  color: #1e293b;
+  font-family: inherit;
+}
+
+.privacyBanner {
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+  border: 0.0625rem solid #bfdbfe;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  margin-bottom: 2.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.privacyIcon {
+  width: 3rem;
+  height: 3rem;
+  min-width: 3rem;
+  background-color: #2563eb;
+  color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.privacyIcon svg {
+  width: 1.625rem;
+  height: 1.625rem;
+}
+
+.privacyText h3 {
+  margin: 0 0 0.25rem 0;
+  font-size: 1.15rem;
+  color: #1e3a8a;
+  font-weight: 700;
+}
+
+.privacyText p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #3b82f6;
+  line-height: 1.45;
+}
+
+.section {
+  margin-bottom: 3rem;
+}
+
+.sectionTitle {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 1rem;
+  border-bottom: 0.125rem solid #e2e8f0;
+  padding-bottom: 0.5rem;
+}
+
+.overviewText {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #334155;
+  margin-bottom: 1rem;
+}
+
+/* Feature grid */
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13.75rem, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.featureCard {
+  background: #ffffff;
+  border: 0.0625rem solid #e2e8f0;
+  border-radius: 0.625rem;
+  padding: 1.25rem;
+  box-shadow: 0 0.0625rem 0.1875rem rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.featureCard:hover {
+  transform: translateY(-0.125rem);
+  box-shadow: 0 0.25rem 0.375rem -0.0625rem rgba(0, 0, 0, 0.1);
+}
+
+.featureCard h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.featureCard p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+/* How to steps */
+.stepsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.stepItem {
+  display: flex;
+  gap: 1.25rem;
+  background: #f8fafc;
+  border-radius: 0.625rem;
+  padding: 1.25rem;
+  border: 0.0625rem solid #e2e8f0;
+}
+
+.stepNumber {
+  width: 2.25rem;
+  height: 2.25rem;
+  min-width: 2.25rem;
+  background: #2563eb;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.stepContent h4 {
+  margin: 0 0 0.25rem 0;
+  font-size: 1.1rem;
+  color: #0f172a;
+}
+
+.stepContent p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #475569;
+  line-height: 1.5;
+}
+
+/* FAQ */
+.faqItem {
+  margin-bottom: 1.25rem;
+  background: #ffffff;
+  border: 0.0625rem solid #e2e8f0;
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+}
+
+.faqItem h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+  color: #0f172a;
+}
+
+.faqItem p {
+  margin: 0;
+  font-size: 0.98rem;
+  color: #475569;
+  line-height: 1.6;
+}
+
+/* Related tools */
+.relatedGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12.5rem, 1fr));
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.relatedCard {
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border: 0.0625rem solid #cbd5e1;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+}
+
+.relatedCard:hover {
+  border-color: #2563eb;
+  background-color: #f0f7ff;
+  transform: translateY(-0.125rem);
+}
+
+.relatedBadge {
+  display: inline-block;
+  background: #e0f2fe;
+  color: #0369a1;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.25rem;
+  margin-bottom: 0.5rem;
+  width: fit-content;
+}
+
+.relatedTitle {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #0f172a;
+  margin: 0;
+  line-height: 1.35;
+}
+
+@media (max-width: 40em) {
+  .sectionTitle {
+    font-size: 1.5rem;
+  }
+  .privacyBanner {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.75rem;
+  }
+  .featuresGrid {
+    grid-template-columns: 1fr;
+  }
+  .relatedGrid {
+    grid-template-columns: 1fr;
+  }
+}

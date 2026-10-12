@@ -1,60 +1,116 @@
 .content {
-  background-color: black;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1em;
-    padding: 0.4em 0.8em;
+  background-color: #0b0f19;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5em;
+  padding: 2em 1.5em 1em 1.5em;
+  border-top: 0.0625rem solid #1e293b;
+}
+
+.toolsContainer {
+  width: 100%;
+  max-width: 68.75rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13.75rem, 1fr));
+  gap: 2em;
+  padding-bottom: 1.5em;
+  border-bottom: 0.0625rem solid #1e293b;
+}
+
+.toolsGroup h4 {
+  color: #94a3b8;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 0.75em 0;
+  font-weight: 700;
+}
+
+.toolsList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55em;
+}
+
+.toolsList a {
+  color: #cbd5e1;
+  text-decoration: none;
+  font-size: 0.88rem;
+  transition: color 0.15s ease;
+}
+
+.toolsList a:hover {
+  color: #38bdf8;
+  text-decoration: underline;
 }
 
 .links {
   display: flex;
-  gap: 1.3em;
+  gap: 1.5em;
   flex-wrap: wrap;
   justify-content: center;
 }
 
 .links a {
-  color: white;
+  color: #94a3b8;
   text-decoration: none;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   transition: color 0.2s;
 }
 
 .links a:hover {
+  color: #f8fafc;
   text-decoration: underline;
 }
 
-.copy {
-  color: white;
+.copyContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 68.75rem;
+  padding-top: 0.5em;
 }
 
-.copyContainer {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
+.copy {
+  color: #64748b;
+  font-size: 0.88rem;
 }
 
 .footerText {
-    color: white;
+  color: #94a3b8;
+  font-size: 0.88rem;
 }
 
 .email {
-    background-color: white;
-    text-decoration: none;
-    padding: 0.1em 0.5em;
-    border-radius: 0.6em;
-    font-weight: 500;
-    margin-left: 0.5em;
+  background-color: #1e293b;
+  color: #38bdf8;
+  text-decoration: none;
+  padding: 0.25em 0.6em;
+  border-radius: 0.4em;
+  font-weight: 500;
+  font-size: 0.85rem;
+  margin-left: 0.5em;
+  transition: background-color 0.2s;
+}
+
+.email:hover {
+  background-color: #334155;
 }
 
 /* media queries */
-@media (max-width: 650px) {
- .copyContainer {
+@media (max-width: 40.625em) {
+  .toolsContainer {
+    grid-template-columns: 1fr;
+    gap: 1.25em;
+  }
+
+  .copyContainer {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    gap: 0.5em;
-}
-
+    gap: 0.75em;
+    text-align: center;
+  }
 }

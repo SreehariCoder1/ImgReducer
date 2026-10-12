@@ -1,8 +1,24 @@
+import Link from "next/link";
 import styles from "../styles/HomeContent.module.css";
+import { toolsData } from "../utils/toolsData";
 
 const HomeContent = () => {
   return (
     <div className={styles.contentContainer}>
+      {/* Featured Free Image Tools Section */}
+      <section className={styles.section}>
+        <h2>Free Specialized Image Tools</h2>
+        <div className={styles.toolsGrid}>
+          {toolsData.map((tool) => (
+            <Link key={tool.slug} href={`/${tool.slug}`} className={styles.toolCard}>
+              <span className={styles.toolCardBadge}>{tool.badge}</span>
+              <h3 className={styles.toolCardTitle}>{tool.h1}</h3>
+              <p className={styles.toolCardDesc}>{tool.subtitle}</p>
+            </Link>
+          ))}
+        </div>
+      </section>
+
       {/* How to Use Section */}
       <section className={styles.section}>
         <h2>How to Use ImgReducer</h2>

@@ -1,4 +1,5 @@
 import { blogData } from "../utils/blogData";
+import { toolsData } from "../utils/toolsData";
 
 export default async function sitemap() {
   const baseUrl = "https://www.img-reducer.com";
@@ -8,7 +9,7 @@ export default async function sitemap() {
     {
       url: `${baseUrl}/`,
       lastModified: new Date(),
-      changeFrequency: "monthly",
+      changeFrequency: "daily",
       priority: 1,
     },
     {
@@ -33,14 +34,20 @@ export default async function sitemap() {
       url: `${baseUrl}/blog`,
       lastModified: new Date(),
       changeFrequency: "weekly",
-      priority: 0.9,
+      priority: 0.8,
     },
   ];
 
+  // Programmatic tool landing page routes
+  const toolRoutes = toolsData.map((tool) => ({
+    url: `${baseUrl}/${tool.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly",
+    priority: 0.9,
+  }));
+
   // Dynamic blog routes
   const blogRoutes = blogData.map((blog) => {
-    // Attempt to convert the hardcoded date (e.g. "February 17, 2026") into an ISO Date.
-    // If invalid, fallback to current date or a hardcoded date.
     const dateObj = new Date(blog.date);
     const lastMod = isNaN(dateObj.getTime()) ? new Date() : dateObj;
 
@@ -52,5 +59,5 @@ export default async function sitemap() {
     };
   });
 
-  return [...staticRoutes, ...blogRoutes];
+  return [...staticRoutes, ...toolRoutes, ...blogRoutes];
 }
