@@ -1,8 +1,8 @@
 import Home from "../components/Home";
 
 export const metadata = {
-  title: "ImgReducer | Resize, Compress & Convert Images Online FREE",
-  description: "Free online image resizer, compressor, and converter. Reduce JPG/JPEG, PNG, SVG, WEBP, HEIC, and AVIF image size instantly without losing quality.",
+  title: "Image Resizer",
+  description: "Free online image resizer",
   alternates: {
     canonical: "https://www.img-reducer.com",
   },

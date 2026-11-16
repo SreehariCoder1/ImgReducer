@@ -870,7 +870,7 @@ const Home = ({ toolData = null }) => {
 
       <main>
         <h1 className={styles.title}>
-          {toolData ? toolData.h1 : "Resize Your Images"}
+          {toolData ? toolData.h1 : "Image Resizer"}
         </h1>
         {toolData?.subtitle && (
           <p
